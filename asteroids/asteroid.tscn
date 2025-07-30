@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3t20axtyp2bg"]
+
+[ext_resource type="Texture2D" uid="uid://djeto0mqb5pn4" path="res://asteroids/asteroid.svg" id="1_fn3cv"]
+[ext_resource type="Script" uid="uid://pocfg1nhh1sw" path="res://asteroids/asteroid.gd" id="1_mry8r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fn3cv"]
+
+[node name="Asteroid" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_mry8r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fn3cv")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_fn3cv")
+
+[node name="DirectionLineEditor" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, -2.18557e-06, 50)
+width = 1.0

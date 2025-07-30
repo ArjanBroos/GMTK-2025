@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cegnxgxnnp0s2"]
+
+[ext_resource type="PackedScene" uid="uid://d3t20axtyp2bg" path="res://asteroids/asteroid.tscn" id="1_ecdi2"]
+
+[node name="KazuTest" type="Node2D"]
+
+[node name="Asteroid1" parent="." instance=ExtResource("1_ecdi2")]
+position = Vector2(357, 214)
+mass = 5.0
+direction_degrees = 45.0
+
+[node name="Asteroid2" parent="." instance=ExtResource("1_ecdi2")]
+position = Vector2(522, 313)
+mass = 2.0
+speed = 40.0
+direction_degrees = 280.0
+
+[node name="Asteroid3" parent="." instance=ExtResource("1_ecdi2")]
+position = Vector2(751, 190)
+direction_degrees = 125.0
