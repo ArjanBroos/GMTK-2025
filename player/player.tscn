@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://5g3i4mhst5kb"]
+
+[ext_resource type="Texture2D" uid="uid://hrun317j6v3h" path="res://player/player.png" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://valb3o157auw" path="res://components/follow_cursor.gd" id="2_rkbax"]
+
+[node name="Player" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oul6g")
+
+[node name="FollowCursor" type="Node2D" parent="." node_paths=PackedStringArray("follower")]
+script = ExtResource("2_rkbax")
+follower = NodePath("..")
+metadata/_custom_type_script = "uid://valb3o157auw"
