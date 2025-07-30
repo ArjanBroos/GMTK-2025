@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx0lychogis7g"]
+
+[ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="1_k5pou"]
+
+[node name="PhilipLevel" type="Node2D"]
+
+[node name="GameManager" parent="." instance=ExtResource("1_k5pou")]
