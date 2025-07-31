@@ -1,3 +1,75 @@
-[gd_scene format=3 uid="uid://ccetrmf5vhby0"]
+[gd_scene load_steps=8 format=3 uid="uid://ccetrmf5vhby0"]
+
+[ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="1_0vhbo"]
+[ext_resource type="PackedScene" uid="uid://bwsjsl424h3v0" path="res://gravity_well/gravity_well.tscn" id="3_ldao0"]
+[ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="4_55n5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55n5f"]
+size = Vector2(1247.5, 39.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wg11f"]
+size = Vector2(46, 591.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yb8kn"]
+size = Vector2(1259, 39.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43k3a"]
+size = Vector2(46, 594.75)
 
 [node name="MainLevel" type="Node2D"]
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_0vhbo")]
+player_spawn_point = NodePath("../PlayerSpawnPoint")
+retry_scene_path = "uid://ccetrmf5vhby0"
+
+[node name="PlayerSpawnPoint" type="Node2D" parent="."]
+position = Vector2(291, 217)
+
+[node name="GravityWell" parent="." instance=ExtResource("3_ldao0")]
+position = Vector2(640, 360)
+pullFactor = 1500.0
+
+[node name="TopSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
+position = Vector2(116, -172)
+spawn_area = NodePath("SpawnArea/CollisionShape2D")
+interval = 3.0
+
+[node name="SpawnArea" type="Area2D" parent="TopSpawner"]
+position = Vector2(-116, 172)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopSpawner/SpawnArea"]
+position = Vector2(640, 32)
+shape = SubResource("RectangleShape2D_55n5f")
+
+[node name="RightSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
+position = Vector2(1463, 310)
+spawn_area = NodePath("SpawnArea/CollisionShape2D")
+interval = 3.2
+
+[node name="SpawnArea" type="Area2D" parent="RightSpawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSpawner/SpawnArea"]
+position = Vector2(-224, 49.25)
+shape = SubResource("RectangleShape2D_wg11f")
+
+[node name="BottomSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
+position = Vector2(638, 873)
+spawn_area = NodePath("SpawnArea/CollisionShape2D")
+interval = 3.15
+
+[node name="SpawnArea" type="Area2D" parent="BottomSpawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomSpawner/SpawnArea"]
+position = Vector2(-0.5, -187.25)
+shape = SubResource("RectangleShape2D_yb8kn")
+
+[node name="LeftSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
+position = Vector2(-161, 356)
+spawn_area = NodePath("SpawnArea/CollisionShape2D")
+interval = 2.0
+
+[node name="SpawnArea" type="Area2D" parent="LeftSpawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSpawner/SpawnArea"]
+position = Vector2(194, 1.625)
+shape = SubResource("RectangleShape2D_43k3a")

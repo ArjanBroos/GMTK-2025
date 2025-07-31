@@ -1,6 +1,8 @@
 extends Node2D
 class_name Spawner
 
+const POSITION_NOISE: float = 50.0
+
 var spawn_timer: Timer
 var asteroid_scene = preload("res://asteroids/asteroid.tscn")
 
@@ -23,6 +25,14 @@ func _ready() -> void:
 	
 	spawn_timer.start()
 	
+func _add_position_noise(vec: Vector2) -> Vector2:
+	var randomRadius = randf() * POSITION_NOISE
+	var randomStep = randf() * 2 * PI
+	
+	var dirVec = Vector2(cos(randomStep), sin(randomStep)) * randomRadius
+	
+	return vec + dirVec
+	
 func _on_spawn_timer_timeout() -> void:
 	# spawn an asteroid randomly in the spawn area
 	var spawnSize = spawn_area.shape.get_rect().size
@@ -40,4 +50,5 @@ func _on_spawn_timer_timeout() -> void:
 	# used for the initial direction of spawned asteroids
 	var window_size = DisplayServer.window_get_size()
 	var center = Vector2(window_size.x / 2, window_size.y / 2)
+	center = _add_position_noise(center)
 	asteroidInstance.direction_degrees = rad_to_deg(asteroidInstance.global_position.angle_to_point(center))
