@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://da5llttdmsvw4" path="res://components/hit_box.gd" id="3_5s5pr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fn3cv"]
+radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cp6py"]
 radius = 6.0

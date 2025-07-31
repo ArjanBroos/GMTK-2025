@@ -1,7 +1,7 @@
 extends Node2D
 class_name Spawner
 
-const POSITION_NOISE: float = 50.0
+const POSITION_NOISE: float = 100.0
 
 var spawn_timer: Timer
 var asteroid_scene = preload("res://asteroids/asteroid.tscn")

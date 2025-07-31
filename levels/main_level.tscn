@@ -27,7 +27,7 @@ position = Vector2(291, 217)
 
 [node name="GravityWell" parent="." instance=ExtResource("3_ldao0")]
 position = Vector2(640, 360)
-pullFactor = 1500.0
+pullFactor = 2500.0
 
 [node name="TopSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
 position = Vector2(116, -172)
