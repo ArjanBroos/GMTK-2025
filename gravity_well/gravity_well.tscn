@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwsjsl424h3v0"]
+
+[ext_resource type="Script" uid="uid://cnhq76ttfiaav" path="res://gravity_well/gravity_well.gd" id="1_cg1c0"]
+[ext_resource type="Texture2D" uid="uid://dnlo2036uj0bu" path="res://gravity_well/gravity_well.png" id="1_tclyp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pu504"]
+radius = 63.0714
+
+[node name="GravityWell" type="Node2D" node_paths=PackedStringArray("area")]
+script = ExtResource("1_cg1c0")
+area = NodePath("Area2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tclyp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pu504")

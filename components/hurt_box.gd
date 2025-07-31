@@ -4,7 +4,7 @@ extends Area2D
 @export var health: Health
 
 func _ready() -> void:
-	connect("area_entered", _on_area_entered)
+	area_entered.connect(_on_area_entered)
 	collision_layer = 2 # Is on the Hurtboxes layer
 	collision_mask = 1 # Collides with the Hitboxes layer
 	
