@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0otbtktu22j8"]
+[gd_scene load_steps=5 format=3 uid="uid://b0otbtktu22j8"]
 
 [ext_resource type="Script" uid="uid://5vjm45mn1xfm" path="res://gameManager/game_manager.gd" id="1_8equb"]
 [ext_resource type="PackedScene" uid="uid://dfm10ac6t4mhr" path="res://HUD/gui.tscn" id="2_6ue64"]
+[ext_resource type="PackedScene" uid="uid://5g3i4mhst5kb" path="res://player/player.tscn" id="2_ah4dg"]
+[ext_resource type="PackedScene" uid="uid://c8no1lpcxau83" path="res://HUD/game_over.tscn" id="4_op76p"]
 
-[node name="GameManager" type="Node" node_paths=PackedStringArray("timeLabel", "scoreLabel")]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("timeLabel", "scoreLabel", "game_over_hud")]
 script = ExtResource("1_8equb")
 timeLabel = NodePath("GUI/timeLabel")
 scoreLabel = NodePath("GUI/scoreLabel")
+game_over_hud = NodePath("GameOver")
+player_scene = ExtResource("2_ah4dg")
 
 [node name="GUI" parent="." instance=ExtResource("2_6ue64")]
 
@@ -34,3 +38,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Score: 0"
 horizontal_alignment = 1
+
+[node name="GameOver" parent="." instance=ExtResource("4_op76p")]
+visible = false

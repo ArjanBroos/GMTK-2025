@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi8i7upp6bayn"]
+[gd_scene load_steps=4 format=3 uid="uid://bi8i7upp6bayn"]
 
-[ext_resource type="PackedScene" uid="uid://5g3i4mhst5kb" path="res://player/player.tscn" id="1_wea2y"]
 [ext_resource type="PackedScene" uid="uid://d3t20axtyp2bg" path="res://asteroids/asteroid.tscn" id="2_hyu0f"]
 [ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="3_0pshc"]
 [ext_resource type="PackedScene" uid="uid://bwsjsl424h3v0" path="res://gravity_well/gravity_well.tscn" id="4_fk478"]
-[ext_resource type="PackedScene" uid="uid://c8no1lpcxau83" path="res://HUD/game_over.tscn" id="5_rh15q"]
 
 [node name="ArjanTests" type="Node2D"]
 
-[node name="GameManager" parent="." node_paths=PackedStringArray("game_over_hud", "player_spawn_point") instance=ExtResource("3_0pshc")]
-game_over_hud = NodePath("../UI/GameOver")
+[node name="GameManager" parent="." node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("3_0pshc")]
 player_spawn_point = NodePath("../PlayerSpawnPoint")
-player_scene = ExtResource("1_wea2y")
 retry_scene_path = "uid://bi8i7upp6bayn"
 
 [node name="GravityWell" parent="." instance=ExtResource("4_fk478")]
@@ -31,18 +27,6 @@ direction_degrees = 170.0
 [node name="Asteroid4" parent="." instance=ExtResource("2_hyu0f")]
 position = Vector2(750, 495)
 direction_degrees = 220.0
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1280.0
-offset_bottom = 719.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="GameOver" parent="UI" instance=ExtResource("5_rh15q")]
-visible = false
-layout_mode = 1
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
 position = Vector2(655, 335)
