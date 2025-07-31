@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cegnxgxnnp0s2"]
+[gd_scene load_steps=6 format=3 uid="uid://cegnxgxnnp0s2"]
 
 [ext_resource type="PackedScene" uid="uid://d3t20axtyp2bg" path="res://asteroids/asteroid.tscn" id="1_ecdi2"]
 [ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="2_82evp"]
+[ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="3_7rs05"]
+[ext_resource type="PackedScene" uid="uid://5g3i4mhst5kb" path="res://player/player.tscn" id="4_u3wta"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82evp"]
 size = Vector2(105, 567.25)
@@ -32,3 +34,9 @@ spawn_area = NodePath("../SpawnArea1/CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea1"]
 position = Vector2(230.5, 380.625)
 shape = SubResource("RectangleShape2D_82evp")
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("3_7rs05")]
+player_spawn_point = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("4_u3wta")]
+position = Vector2(664, 342)
