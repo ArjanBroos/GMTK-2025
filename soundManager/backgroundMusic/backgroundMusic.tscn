@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmpyud5b00pej"]
+
+[ext_resource type="Script" uid="uid://dphe4d8pbedmv" path="res://soundManager/backgroundMusic/musicManager.gd" id="1_cobxf"]
+[ext_resource type="AudioStream" uid="uid://dg6tuohinpxme" path="res://soundManager/backgroundMusic/Looperoids-stage1.ogg" id="1_tiel5"]
+[ext_resource type="AudioStream" uid="uid://c47kymnep51j5" path="res://soundManager/backgroundMusic/Looperoids-stage2.ogg" id="3_msbti"]
+[ext_resource type="AudioStream" uid="uid://t86gom0vf163" path="res://soundManager/backgroundMusic/Looperoids-stage3.ogg" id="4_skfni"]
+
+[node name="BackgroundMusic" type="Node" node_paths=PackedStringArray("bgMusicPlayer")]
+script = ExtResource("1_cobxf")
+bgMusicPlayer = NodePath("AudioStreamPlayer")
+stage1Music = ExtResource("1_tiel5")
+stage2Music = ExtResource("3_msbti")
+stage3Music = ExtResource("4_skfni")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_msbti")
+autoplay = true
