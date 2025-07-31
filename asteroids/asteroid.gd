@@ -33,16 +33,16 @@ func _determine_mirror_position(cur_pos: Vector2) -> Vector2:
 	
 	if cur_pos.x > window.x:
 		# exited on the right
-		new_pos = Vector2(0, cur_pos.y)
+		new_pos = Vector2(0, clamp(cur_pos.y, 0, window.y))
 	elif cur_pos.x < 0:
 		# exited on the left
-		new_pos = Vector2(window.x, cur_pos.y)
+		new_pos = Vector2(window.x, clamp(cur_pos.y, 0, window.y))
 	elif cur_pos.y > window.y:
 		# exited at the bottom
-		new_pos = Vector2(cur_pos.x, 0)
+		new_pos = Vector2(clamp(cur_pos.x, 0, window.x), 0)
 	elif cur_pos.y < 0:
 		# exited at the top
-		new_pos = Vector2(cur_pos.x, window.y)
+		new_pos = Vector2(clamp(cur_pos.x, 0, window.x), window.y)
 		
 	return new_pos
 
