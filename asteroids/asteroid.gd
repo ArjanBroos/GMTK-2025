@@ -29,20 +29,22 @@ func _determine_mirror_position(cur_pos: Vector2) -> Vector2:
 	# the position of the asteroid to either the 0 or window width/height based
 	# on where on the screen the asteroid left
 	
+	var new_pos: Vector2
+	
 	if cur_pos.x > window.x:
 		# exited on the right
-		position = Vector2(0, cur_pos.y)
+		new_pos = Vector2(0, cur_pos.y)
 	elif cur_pos.x < 0:
 		# exited on the left
-		position = Vector2(window.x, cur_pos.y)
+		new_pos = Vector2(window.x, cur_pos.y)
 	elif cur_pos.y > window.y:
 		# exited at the bottom
-		position = Vector2(cur_pos.x, 0)
+		new_pos = Vector2(cur_pos.x, 0)
 	elif cur_pos.y < 0:
 		# exited at the top
-		position = Vector2(cur_pos.x, window.y)
+		new_pos = Vector2(cur_pos.x, window.y)
 		
-	return Vector2.DOWN
+	return new_pos
 
 func _on_visible_on_screen_screen_exited() -> void:
-	_determine_mirror_position(global_position)
+	position = _determine_mirror_position(global_position)
