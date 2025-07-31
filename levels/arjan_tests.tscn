@@ -14,7 +14,18 @@ position = Vector2(576, 348)
 
 [node name="GravityWell" parent="." instance=ExtResource("4_fk478")]
 position = Vector2(553, 292)
-pullFactor = 100.0
 
 [node name="Asteroid" parent="." instance=ExtResource("2_hyu0f")]
-position = Vector2(524, 170)
+position = Vector2(507, 176)
+
+[node name="Asteroid2" parent="." instance=ExtResource("2_hyu0f")]
+position = Vector2(676, 122)
+direction_degrees = 110.0
+
+[node name="Asteroid3" parent="." instance=ExtResource("2_hyu0f")]
+position = Vector2(894, 223)
+direction_degrees = 170.0
+
+[node name="Asteroid4" parent="." instance=ExtResource("2_hyu0f")]
+position = Vector2(750, 495)
+direction_degrees = 220.0
