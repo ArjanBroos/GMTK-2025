@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3t20axtyp2bg"]
+[gd_scene load_steps=6 format=3 uid="uid://d3t20axtyp2bg"]
 
 [ext_resource type="Texture2D" uid="uid://djeto0mqb5pn4" path="res://asteroids/asteroid.svg" id="1_fn3cv"]
 [ext_resource type="Script" uid="uid://pocfg1nhh1sw" path="res://asteroids/asteroid.gd" id="1_mry8r"]
+[ext_resource type="Script" uid="uid://da5llttdmsvw4" path="res://components/hit_box.gd" id="3_5s5pr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fn3cv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cp6py"]
+radius = 6.0
 
 [node name="Asteroid" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -18,3 +22,12 @@ texture = ExtResource("1_fn3cv")
 [node name="DirectionLineEditor" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, -2.18557e-06, 50)
 width = 1.0
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("3_5s5pr")
+metadata/_custom_type_script = "uid://da5llttdmsvw4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_cp6py")
+debug_color = Color(0.985896, 0.116401, 0, 0.42)

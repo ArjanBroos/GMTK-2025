@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://5g3i4mhst5kb"]
+[gd_scene load_steps=7 format=3 uid="uid://5g3i4mhst5kb"]
 
 [ext_resource type="Texture2D" uid="uid://hrun317j6v3h" path="res://player/player.png" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://cuk138uhfuit" path="res://player/player.gd" id="1_qjkh3"]
 [ext_resource type="Script" uid="uid://valb3o157auw" path="res://components/follow_cursor.gd" id="2_rkbax"]
+[ext_resource type="Script" uid="uid://c87y1h43er7n8" path="res://components/health.gd" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://bfb6nj1lrv6ay" path="res://components/hurt_box.gd" id="4_qjkh3"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
+size = Vector2(30, 30)
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("health")]
+script = ExtResource("1_qjkh3")
+health = NodePath("Health")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_oul6g")
@@ -12,3 +20,16 @@ texture = ExtResource("1_oul6g")
 script = ExtResource("2_rkbax")
 follower = NodePath("..")
 metadata/_custom_type_script = "uid://valb3o157auw"
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_yw30f")
+metadata/_custom_type_script = "uid://c87y1h43er7n8"
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+script = ExtResource("4_qjkh3")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://bfb6nj1lrv6ay"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_g6k8r")

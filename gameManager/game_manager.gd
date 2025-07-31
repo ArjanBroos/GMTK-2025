@@ -8,6 +8,7 @@ var timerRunning: bool = false
 func _ready() -> void:
 	# connect signal to update score
 	Signalbus.connect("increaseScore", updateScore)
+	Signalbus.connect("playerDied", _on_player_died)
 	print("starting scene")
 	resetScore()
 	startTimer()
@@ -42,6 +43,8 @@ func stopTimer() -> void:
 # 		print("finished emitting signal")
 		
 
+func _on_player_died() -> void:
+	print("Oh no! The player died!")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
