@@ -5,13 +5,23 @@ extends Node
 @export var stage2Music: AudioStream
 @export var stage3Music: AudioStream
 var stageLevel: int = 0
+var musicLengthTimer: Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	# set up the timer for spawning the asteroids
+	musicLengthTimer = Timer.new()
+	add_child(musicLengthTimer)
+	musicLengthTimer.timeout.connect(setMusicStage.bind(stageLevel))
+	musicLengthTimer.start()
+
+	# Connect other signals
 	Signalbus.connect("playerDied", resetStage)
 	Signalbus.connect("increaseMusicStage", increaseStageLevel)
 	resetStage()
 	bgMusicPlayer.play()
+
 
 func resetStage() -> void:
 	stageLevel = 0
@@ -35,3 +45,6 @@ func setMusicStage(level: int) -> void:
 			bgMusicPlayer.stream = stage2Music
 		3: 
 			bgMusicPlayer.stream = stage3Music
+	print(bgMusicPlayer.stream.get_length())
+	musicLengthTimer.start(bgMusicPlayer.stream.get_length())
+	bgMusicPlayer.play()

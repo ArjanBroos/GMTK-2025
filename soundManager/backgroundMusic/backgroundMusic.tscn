@@ -13,5 +13,7 @@ stage2Music = ExtResource("3_msbti")
 stage3Music = ExtResource("4_skfni")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_msbti")
+stream = ExtResource("1_tiel5")
 autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
