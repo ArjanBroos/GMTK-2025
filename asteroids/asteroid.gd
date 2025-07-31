@@ -45,5 +45,4 @@ func _determine_mirror_position(cur_pos: Vector2) -> Vector2:
 	return Vector2.DOWN
 
 func _on_visible_on_screen_screen_exited() -> void:
-	print("I has left the building!")
 	_determine_mirror_position(global_position)
