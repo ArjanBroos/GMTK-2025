@@ -50,6 +50,7 @@ func updateTimer(elapsedTime: float) -> void:
 	var seconds: float = fmod(gameTimer, 60) 
 	var mseconds: float = fmod(gameTimer, 1) * 100
 	timeLabel.text = str(roundi(floor(minutes))) + ":" + str(roundi(seconds)) + ":" + str(roundi(mseconds))
+	timeLabel.text = ("%02d:%02d:%02d" % [minutes, seconds, mseconds])
 
 # Stop timer from running
 func stopTimer() -> void:
@@ -66,6 +67,7 @@ func stopTimer() -> void:
 # 		print("finished emitting signal")		
 
 func _on_player_died() -> void:
+	stopTimer()
 	game_over_hud.visible = true
 	game_over = true
 	player.queue_free()
