@@ -16,11 +16,9 @@ func _process(delta: float) -> void:
 		asteroid.apply_central_force(force)
 
 func _on_body_entered(asteroid: Asteroid) -> void:
-	print("Asteroid entered")
 	affectedAsteroids.append(asteroid)
 
 func _on_body_exited(asteroid: Asteroid) -> void:
-	print("Asteroid left")
 	affectedAsteroids.erase(asteroid)
 
 func _determine_force(asteroid: Asteroid) -> Vector2:
