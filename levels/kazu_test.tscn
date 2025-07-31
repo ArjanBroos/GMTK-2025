@@ -4,17 +4,17 @@
 
 [node name="KazuTest" type="Node2D"]
 
-[node name="Asteroid1" parent="." instance=ExtResource("1_ecdi2")]
-position = Vector2(357, 214)
-mass = 5.0
-direction_degrees = 45.0
-
-[node name="Asteroid2" parent="." instance=ExtResource("1_ecdi2")]
-position = Vector2(522, 313)
-mass = 2.0
-speed = 40.0
-direction_degrees = 280.0
-
 [node name="Asteroid3" parent="." instance=ExtResource("1_ecdi2")]
 position = Vector2(751, 190)
-direction_degrees = 125.0
+speed = 60.0
+direction_degrees = 35.0
+
+[node name="Asteroid4" parent="." instance=ExtResource("1_ecdi2")]
+position = Vector2(528, 111)
+speed = 71.33
+direction_degrees = 144.77
+
+[node name="Asteroid5" parent="." instance=ExtResource("1_ecdi2")]
+position = Vector2(369, 384)
+speed = 81.9
+direction_degrees = -13.965

@@ -31,3 +31,7 @@ metadata/_custom_type_script = "uid://da5llttdmsvw4"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_cp6py")
 debug_color = Color(0.985896, 0.116401, 0, 0.42)
+
+[node name="VisibleOnScreen" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreen" to="." method="_on_visible_on_screen_screen_exited"]

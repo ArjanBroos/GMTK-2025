@@ -21,3 +21,29 @@ func _process(_delta: float) -> void:
 		queue_redraw()
 	else:
 		direction_line_editor.visible = false
+
+func _determine_mirror_position(cur_pos: Vector2) -> Vector2:
+	var window = DisplayServer.window_get_size()
+	
+	# positions are determined by taking the window width/height and resetting
+	# the position of the asteroid to either the 0 or window width/height based
+	# on where on the screen the asteroid left
+	
+	if cur_pos.x > window.x:
+		# exited on the right
+		position = Vector2(0, cur_pos.y)
+	elif cur_pos.x < 0:
+		# exited on the left
+		position = Vector2(window.x, cur_pos.y)
+	elif cur_pos.y > window.y:
+		# exited at the bottom
+		position = Vector2(cur_pos.x, 0)
+	elif cur_pos.y < 0:
+		# exited at the top
+		position = Vector2(cur_pos.x, window.y)
+		
+	return Vector2.DOWN
+
+func _on_visible_on_screen_screen_exited() -> void:
+	print("I has left the building!")
+	_determine_mirror_position(global_position)
