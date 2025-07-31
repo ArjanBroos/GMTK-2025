@@ -3,17 +3,25 @@ extends Node
 var playerScore: int = 0
 var gameTimer: float = 0.0
 var timerRunning: bool = false
+var game_over: bool = false
+var player: Player
 @export var timeLabel: Label
 @export var scoreLabel: Label
+@export var game_over_hud: GameOverHud
+@export var player_spawn_point: Node2D
+@export var player_scene: PackedScene
+@export_file("*.tscn") var retry_scene_path: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect signal to update score
 	Signalbus.connect("increaseScore", updateScore)
 	Signalbus.connect("playerDied", _on_player_died)
+	game_over_hud.player_wants_to_try_again.connect(_on_player_wants_to_try_again)
 	print("starting scene")
 	resetScore()
 	startTimer()
+	_spawn_player()
 
 # Function sets the player score to 0
 func resetScore() -> void:
@@ -22,8 +30,10 @@ func resetScore() -> void:
 
 # Adjust player score by x
 func updateScore(x:int) -> int:
+	if game_over:
+		return playerScore
+		
 	playerScore = playerScore + x
-	print("score updated " + str(playerScore))
 	scoreLabel.text = "Score: " + str(playerScore)
 	return playerScore
 
@@ -56,8 +66,19 @@ func stopTimer() -> void:
 # 		print("finished emitting signal")		
 
 func _on_player_died() -> void:
-	print("Oh no! The player died!")
+	game_over_hud.visible = true
+	game_over = true
+	player.queue_free()
 
+func _on_player_wants_to_try_again() -> void:
+	game_over_hud.visible = false
+	game_over = false
+	get_tree().change_scene_to_file(retry_scene_path)
+
+func _spawn_player() -> void:
+	player = player_scene.instantiate()
+	player_spawn_point.add_child(player)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if timerRunning:
