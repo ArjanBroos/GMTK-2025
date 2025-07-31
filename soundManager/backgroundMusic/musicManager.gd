@@ -8,9 +8,14 @@ var stageLevel: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Signalbus.connect("playerDied", resetStage)
+	Signalbus.connect("increaseMusicStage", increaseStageLevel)
+	resetStage()
+	bgMusicPlayer.play()
+
+func resetStage() -> void:
 	stageLevel = 0
 	setMusicStage(stageLevel)
-	bgMusicPlayer.play()
 
 # Increase the stage level
 func increaseStageLevel() -> void:
@@ -30,9 +35,3 @@ func setMusicStage(level: int) -> void:
 			bgMusicPlayer.stream = stage2Music
 		3: 
 			bgMusicPlayer.stream = stage3Music
-		
-		
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

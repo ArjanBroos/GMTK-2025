@@ -4,3 +4,5 @@ extends Node
 signal increaseScore(amount)
 
 signal playerDied()
+
+signal increaseMusicStage
