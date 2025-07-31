@@ -42,6 +42,8 @@ func _on_spawn_timer_timeout() -> void:
 	
 	var asteroidInstance: Asteroid = asteroid_scene.instantiate()
 	add_child(asteroidInstance)
+	# Emit signal for spawning asteroid
+	Signalbus.spawnAsteroid.emit()
 	
 	asteroidInstance.global_position = Vector2(randX, randY)
 	asteroidInstance.speed = min_speed + (randf() * (max_speed - min_speed))

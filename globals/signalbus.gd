@@ -6,3 +6,7 @@ signal increaseScore(amount)
 signal playerDied()
 
 signal increaseMusicStage
+
+signal spawnAsteroid
+
+signal despawnAsteroid

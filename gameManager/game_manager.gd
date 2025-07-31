@@ -5,6 +5,7 @@ var gameTimer: float = 0.0
 var timerRunning: bool = false
 var game_over: bool = false
 var player: Player
+var nrAsteroids: int
 @export var timeLabel: Label
 @export var scoreLabel: Label
 @export var game_over_hud: GameOverHud
@@ -17,11 +18,13 @@ func _ready() -> void:
 	# connect signal to update score
 	Signalbus.connect("increaseScore", updateScore)
 	Signalbus.connect("playerDied", _on_player_died)
+	Signalbus.connect("spawnAsteroid", increaseAsteroidCount)
 	game_over_hud.player_wants_to_try_again.connect(_on_player_wants_to_try_again)
 	print("starting scene")
 	resetScore()
 	startTimer()
 	_spawn_player()
+	nrAsteroids = 0
 
 # Function sets the player score to 0
 func resetScore() -> void:
@@ -85,3 +88,10 @@ func _spawn_player() -> void:
 func _process(delta: float) -> void:
 	if timerRunning:
 		updateTimer(delta)
+
+# Function to track asteroid count, also increases the music stage at certain amounts
+func increaseAsteroidCount() -> void:
+	nrAsteroids += 1
+	# TODO Makes some sensible amount for switching the music
+	if nrAsteroids == 5 || nrAsteroids == 10:
+		Signalbus.increaseMusicStage.emit()

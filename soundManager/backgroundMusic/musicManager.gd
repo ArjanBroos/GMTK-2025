@@ -13,7 +13,7 @@ func _ready() -> void:
 	# set up the timer for spawning the asteroids
 	musicLengthTimer = Timer.new()
 	add_child(musicLengthTimer)
-	musicLengthTimer.timeout.connect(setMusicStage.bind(stageLevel))
+	musicLengthTimer.timeout.connect(getStageLevel)
 	musicLengthTimer.start()
 
 	# Connect other signals
@@ -24,18 +24,21 @@ func _ready() -> void:
 
 
 func resetStage() -> void:
-	stageLevel = 0
+	stageLevel = 1
+	setMusicStage(stageLevel)
+
+func getStageLevel() -> void:
 	setMusicStage(stageLevel)
 
 # Increase the stage level
 func increaseStageLevel() -> void:
 	if stageLevel + 1 <=3: 
 		stageLevel += 1
-	setMusicStage(stageLevel)
+		# print("increasing music level to level: " + str(stageLevel))
 
 # set stage for the background music
 func setMusicStage(level: int) -> void:
-	print("level of the music now is " + str(level))
+	# print("level of the music now is " + str(level))
 	match int(level):
 		0:
 			bgMusicPlayer.stream = stage1Music			
