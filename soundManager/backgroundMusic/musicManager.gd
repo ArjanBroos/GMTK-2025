@@ -4,6 +4,7 @@ extends Node
 @export var stage1Music: AudioStream
 @export var stage2Music: AudioStream
 @export var stage3Music: AudioStream
+@export var gameoverMusic: AudioStream
 var stageLevel: int = 0
 var musicLengthTimer: Timer
 
@@ -19,12 +20,12 @@ func _ready() -> void:
 	# Connect other signals
 	Signalbus.connect("playerDied", resetStage)
 	Signalbus.connect("increaseMusicStage", increaseStageLevel)
-	resetStage()
-	bgMusicPlayer.play()
+	stageLevel = 1
+	setMusicStage(stageLevel)
 
 
 func resetStage() -> void:
-	stageLevel = 1
+	stageLevel = 0
 	setMusicStage(stageLevel)
 
 func getStageLevel() -> void:
@@ -41,7 +42,7 @@ func setMusicStage(level: int) -> void:
 	# print("level of the music now is " + str(level))
 	match int(level):
 		0:
-			bgMusicPlayer.stream = stage1Music			
+			bgMusicPlayer.stream = gameoverMusic			
 		1: 
 			bgMusicPlayer.stream = stage1Music
 		2:
