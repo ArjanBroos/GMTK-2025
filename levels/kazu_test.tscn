@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cegnxgxnnp0s2"]
+[gd_scene load_steps=4 format=3 uid="uid://cegnxgxnnp0s2"]
 
 [ext_resource type="PackedScene" uid="uid://d3t20axtyp2bg" path="res://asteroids/asteroid.tscn" id="1_ecdi2"]
+[ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="2_82evp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82evp"]
+size = Vector2(105, 567.25)
 
 [node name="KazuTest" type="Node2D"]
 
@@ -18,3 +22,13 @@ direction_degrees = 144.77
 position = Vector2(369, 384)
 speed = 81.9
 direction_degrees = -13.965
+
+[node name="Spawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("2_82evp")]
+position = Vector2(208, 228)
+spawn_area = NodePath("../SpawnArea1/CollisionShape2D")
+
+[node name="SpawnArea1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea1"]
+position = Vector2(230.5, 380.625)
+shape = SubResource("RectangleShape2D_82evp")

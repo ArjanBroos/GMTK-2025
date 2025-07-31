@@ -47,4 +47,4 @@ func _determine_mirror_position(cur_pos: Vector2) -> Vector2:
 	return new_pos
 
 func _on_visible_on_screen_screen_exited() -> void:
-	position = _determine_mirror_position(global_position)
+	global_position = _determine_mirror_position(global_position)
