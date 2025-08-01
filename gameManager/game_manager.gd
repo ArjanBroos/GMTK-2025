@@ -13,12 +13,20 @@ var nrAsteroids: int
 @export var player_scene: PackedScene
 @export_file("*.tscn") var retry_scene_path: String
 
+@onready var unsafe_label: Label = $GUI/unsafeLabel
+@onready var grace_period_timer: Timer = $GracePeriodTimer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect signal to update score
 	Signalbus.connect("increaseScore", updateScore)
 	Signalbus.connect("playerDied", _on_player_died)
 	Signalbus.connect("spawnAsteroid", increaseAsteroidCount)
+	Signalbus.connect("outOfSafety", _unsafe_area_entered)
+	Signalbus.connect("backInSafety", _safe_area_entered)
+	
+	grace_period_timer.timeout.connect(_on_player_died)
+	
 	game_over_hud.player_wants_to_try_again.connect(_on_player_wants_to_try_again)
 	print("starting scene")
 	resetScore()
@@ -95,3 +103,11 @@ func increaseAsteroidCount() -> void:
 	# TODO Makes some sensible amount for switching the music
 	if nrAsteroids == 5 || nrAsteroids == 10:
 		Signalbus.increaseMusicStage.emit()
+		
+func _unsafe_area_entered() -> void:
+	unsafe_label.visible = true
+	grace_period_timer.start()
+	
+func _safe_area_entered() -> void:
+	unsafe_label.visible = false
+	grace_period_timer.stop()

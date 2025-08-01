@@ -10,3 +10,6 @@ signal increaseMusicStage
 signal spawnAsteroid
 
 signal despawnAsteroid
+
+signal outOfSafety
+signal backInSafety

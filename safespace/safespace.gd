@@ -7,11 +7,14 @@ class_name SafeSpace
 @export
 var rotation_speed: float = 100.0
 @export_range(0,1000)
-var inner_radius: float = 25.0
+var inner_radius: float = 50.0
 @export_range(10,1000)
-var outer_radius: float = 150.0
+var outer_radius: float = 250.0
 @export
 var arc_length: int = 15
+
+@export
+var pause_in_editor: bool = false
 
 func _calculate_collision_shape() -> void:
 	# reset the editor shape and start making something that actually looks like a pizza slice
@@ -33,7 +36,6 @@ func _calculate_collision_shape() -> void:
 func _ready() -> void:
 	_calculate_collision_shape()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		# explicitly calculate the shape here because in-editor
@@ -41,8 +43,11 @@ func _process(delta: float) -> void:
 		_calculate_collision_shape()
 		queue_redraw()
 	
-	rotate(deg_to_rad(rotation_speed / 100))
+	if !Engine.is_editor_hint() || (Engine.is_editor_hint() && !pause_in_editor):
+		rotate(deg_to_rad(rotation_speed / 100))
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	print("Player entering!")
-	pass # Replace with function body.
+	Signalbus.backInSafety.emit()
+
+func _on_safe_area_area_exited(area: Area2D) -> void:
+	Signalbus.outOfSafety.emit()

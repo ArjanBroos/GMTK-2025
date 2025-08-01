@@ -24,11 +24,8 @@ player_spawn_point = NodePath("../PlayerSpawnPoint")
 retry_scene_path = "uid://cegnxgxnnp0s2"
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
-position = Vector2(526, 370)
+position = Vector2(809, 188)
 
 [node name="Safespace" parent="." instance=ExtResource("3_sdsww")]
-position = Vector2(737, 349)
-rotation = 154.965
-rotation_speed = 10.0
-inner_radius = 50.0
-outer_radius = 250.0
+position = Vector2(640, 296)
+rotation = 27.8211
