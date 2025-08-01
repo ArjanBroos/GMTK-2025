@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://5g3i4mhst5kb"]
+[gd_scene load_steps=8 format=3 uid="uid://5g3i4mhst5kb"]
 
 [ext_resource type="Texture2D" uid="uid://hrun317j6v3h" path="res://player/player.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cuk138uhfuit" path="res://player/player.gd" id="1_qjkh3"]
+[ext_resource type="Script" uid="uid://b3s0q2nv1375l" path="res://player/tether.gd" id="2_g6k8r"]
 [ext_resource type="Script" uid="uid://valb3o157auw" path="res://components/follow_cursor.gd" id="2_rkbax"]
 [ext_resource type="Script" uid="uid://c87y1h43er7n8" path="res://components/health.gd" id="3_yw30f"]
 [ext_resource type="Script" uid="uid://bfb6nj1lrv6ay" path="res://components/hurt_box.gd" id="4_qjkh3"]
@@ -9,27 +10,37 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
 size = Vector2(30, 30)
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("health")]
+[node name="PlayerHome" type="Node2D"]
+
+[node name="Tether" type="Line2D" parent="." node_paths=PackedStringArray("player")]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+script = ExtResource("2_g6k8r")
+player = NodePath("../Player")
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("health")]
+position = Vector2(29, -30)
 script = ExtResource("1_qjkh3")
 health = NodePath("Health")
+metadata/_custom_type_script = "uid://cuk138uhfuit"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("1_oul6g")
 
-[node name="FollowCursor" type="Node2D" parent="." node_paths=PackedStringArray("follower")]
+[node name="FollowCursor" type="Node2D" parent="Player" node_paths=PackedStringArray("follower")]
 script = ExtResource("2_rkbax")
 follower = NodePath("..")
 metadata/_custom_type_script = "uid://valb3o157auw"
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="Player"]
 script = ExtResource("3_yw30f")
 metadata/_custom_type_script = "uid://c87y1h43er7n8"
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="HurtBox" type="Area2D" parent="Player" node_paths=PackedStringArray("health")]
 collision_layer = 2
 script = ExtResource("4_qjkh3")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bfb6nj1lrv6ay"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HurtBox"]
 shape = SubResource("RectangleShape2D_g6k8r")

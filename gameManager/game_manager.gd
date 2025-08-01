@@ -4,7 +4,7 @@ var playerScore: int = 0
 var gameTimer: float = 0.0
 var timerRunning: bool = false
 var game_over: bool = false
-var player: Player
+var player: Node2D
 var nrAsteroids: int
 @export var timeLabel: Label
 @export var scoreLabel: Label
