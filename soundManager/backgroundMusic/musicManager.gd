@@ -49,6 +49,6 @@ func setMusicStage(level: int) -> void:
 			bgMusicPlayer.stream = stage2Music
 		3: 
 			bgMusicPlayer.stream = stage3Music
-	print(bgMusicPlayer.stream.get_length())
+	#print(bgMusicPlayer.stream.get_length())
 	musicLengthTimer.start(bgMusicPlayer.stream.get_length())
 	bgMusicPlayer.play()

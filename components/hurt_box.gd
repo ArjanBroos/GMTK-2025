@@ -15,7 +15,6 @@ func _on_area_entered(area: CollisionObject2D) -> void:
 			health.take_damage(area.damage)
 
 func _on_area_exited(area: CollisionObject2D) -> void:
-	print("left area with name: " + area.name)
 	match area.name:
 		"NearMissBox":
 			Signalbus.nearmissSignal.emit()

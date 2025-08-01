@@ -7,6 +7,8 @@ var game_over: bool = false
 var player: Node2D
 var nrAsteroids: int
 var nearMissBonus: int = 1
+var deathStopTimeScale:float = 0.02
+var deathStopSeconds:float = 2
 @export var timeLabel: Label
 @export var scoreLabel: Label
 @export var game_over_hud: GameOverHud
@@ -17,17 +19,20 @@ var nearMissBonus: int = 1
 @onready var unsafe_label: Label = $GUI/unsafeLabel
 @onready var grace_period_timer: Timer = $GracePeriodTimer
 
+@onready var deathStopTimer: Timer = $DeathStopTimer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect signal to update score
 	Signalbus.connect("increaseScore", updateScore)
-	Signalbus.connect("playerDied", _on_player_died)
+	Signalbus.connect("playerDied", deathStopToggle)
 	Signalbus.connect("spawnAsteroid", increaseAsteroidCount)
 	Signalbus.connect("outOfSafety", _unsafe_area_entered)
 	Signalbus.connect("backInSafety", _safe_area_entered)
 	Signalbus.connect("nearmissSignal", updateScore.bind(nearMissBonus))
 	
-	grace_period_timer.timeout.connect(_on_player_died)
+	grace_period_timer.timeout.connect(deathStopToggle)
+	deathStopTimer.timeout.connect(_on_player_died)
 	
 	game_over_hud.player_wants_to_try_again.connect(_on_player_wants_to_try_again)
 	print("starting scene")
@@ -35,6 +40,7 @@ func _ready() -> void:
 	startTimer()
 	_spawn_player()
 	nrAsteroids = 0
+	Engine.time_scale = 1
 
 # Function sets the player score to 0
 func resetScore() -> void:
@@ -79,12 +85,19 @@ func stopTimer() -> void:
 # 		Signalbus.increaseScore.emit(10)
 # 		print("finished emitting signal")		
 
-func _on_player_died() -> void:
+func deathStopToggle() -> void:
+	Engine.time_scale = deathStopTimeScale
 	stopTimer()
+	grace_period_timer.stop()
+	deathStopTimer.start(deathStopSeconds*deathStopTimeScale)
+
+func _on_player_died() -> void:
+	Engine.time_scale = 0
 	game_over_hud.visible = true
 	game_over = true
-	player.queue_free()
-	grace_period_timer.stop()
+	# TODO: not sure why the queue_free breaks the game in my implementation but it works without
+	#player.queue_free()
+
 
 func _on_player_wants_to_try_again() -> void:
 	game_over_hud.visible = false
