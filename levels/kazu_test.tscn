@@ -28,4 +28,4 @@ position = Vector2(809, 188)
 
 [node name="Safespace" parent="." instance=ExtResource("3_sdsww")]
 position = Vector2(640, 296)
-rotation = 27.8211
+rotation = 182.631
