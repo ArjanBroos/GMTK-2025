@@ -84,6 +84,7 @@ func _on_player_died() -> void:
 	game_over_hud.visible = true
 	game_over = true
 	player.queue_free()
+	grace_period_timer.stop()
 
 func _on_player_wants_to_try_again() -> void:
 	game_over_hud.visible = false
@@ -98,6 +99,9 @@ func _spawn_player() -> void:
 func _process(delta: float) -> void:
 	if timerRunning:
 		updateTimer(delta)
+	if !grace_period_timer.is_stopped() && unsafe_label.visible:
+		unsafe_label.text = "Warning!
+Unsafe area entered! " + str("%0.2f" % (grace_period_timer.time_left))
 
 # Function to track asteroid count, also increases the music stage at certain amounts
 func increaseAsteroidCount() -> void:
