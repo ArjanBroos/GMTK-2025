@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cegnxgxnnp0s2"]
+[gd_scene load_steps=5 format=3 uid="uid://cegnxgxnnp0s2"]
 
 [ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="2_82evp"]
 [ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="3_7rs05"]
+[ext_resource type="PackedScene" uid="uid://4x460bm5yske" path="res://safespace/safespace.tscn" id="3_sdsww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82evp"]
 size = Vector2(105, 567.25)
@@ -15,7 +16,7 @@ spawn_area = NodePath("../SpawnArea1/CollisionShape2D")
 [node name="SpawnArea1" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea1"]
-position = Vector2(185, -1)
+position = Vector2(98, 329)
 shape = SubResource("RectangleShape2D_82evp")
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("3_7rs05")]
@@ -23,4 +24,10 @@ player_spawn_point = NodePath("../PlayerSpawnPoint")
 retry_scene_path = "uid://cegnxgxnnp0s2"
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
-position = Vector2(526, 370)
+position = Vector2(809, 188)
+
+[node name="Safespace" parent="." instance=ExtResource("3_sdsww")]
+position = Vector2(676, 348)
+rotation = 238.586
+rotation_speed = 50.0
+outer_radius = 300.0
