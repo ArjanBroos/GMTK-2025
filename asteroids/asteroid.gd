@@ -4,12 +4,15 @@ extends RigidBody2D
 
 @export var speed: float = 20.0
 @export var direction_degrees: float = 90.0
+@export var damp: float = 0.15
 
 @onready var direction_line_editor: Line2D = $DirectionLineEditor
 
+func _ready() -> void:
+	linear_damp = damp
+
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var dirVec = Vector2.RIGHT.rotated(deg_to_rad(direction_degrees))
-	
 	apply_central_force(dirVec * speed)
 
 func _draw() -> void:
