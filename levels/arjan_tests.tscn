@@ -30,3 +30,9 @@ direction_degrees = 220.0
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
 position = Vector2(655, 335)
+
+[node name="GravityWell2" parent="." instance=ExtResource("4_fk478")]
+position = Vector2(1106, 584)
+
+[node name="GravityWell3" parent="." instance=ExtResource("4_fk478")]
+position = Vector2(336, 572)
