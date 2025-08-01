@@ -49,7 +49,9 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		# explicitly calculate the shape here because in-editor
 		# the _ready function is not called
-		_set_collision_shape(_calculate_shape())
+		var shape = _calculate_shape()
+		_set_collision_shape(shape)
+		_set_visible_shape(shape)
 		queue_redraw()
 	
 	if !Engine.is_editor_hint() || (Engine.is_editor_hint() && !pause_in_editor):
