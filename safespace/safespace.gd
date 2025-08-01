@@ -26,20 +26,6 @@ func _ready() -> void:
 	points.append(Vector2.ZERO)
 	
 	collision_shape.polygon = points
-	
-func _draw() -> void:
-	var points: Array[Vector2] = []
-	points.append(Vector2.ZERO)
-	
-	# calculate an arc
-	var step = (2 * PI) / 90 # 4 degree steps
-	for i in range(arc_length):
-		var vec = Vector2(cos(i * step) * radius, sin(i * step) * radius)
-		points.append(vec)
-	
-	points.append(Vector2.ZERO)
-	
-	collision_shape.polygon = points
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
