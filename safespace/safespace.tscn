@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://4x460bm5yske"]
+
+[ext_resource type="Script" uid="uid://bya741h8qj5u7" path="res://safespace/safespace.gd" id="1_ky3af"]
+
+[node name="Safespace" type="Node2D"]
+script = ExtResource("1_ky3af")
+
+[node name="SafeArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionPolygon2D" parent="SafeArea"]
+polygon = PackedVector2Array(0, 0, 0, -207, 26, -216, 57, -219, 89, -214, 116, -200, 141, -183, 153, -162)
+
+[connection signal="area_entered" from="SafeArea" to="." method="_on_area_2d_area_entered"]
