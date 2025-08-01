@@ -27,6 +27,8 @@ retry_scene_path = "uid://cegnxgxnnp0s2"
 position = Vector2(526, 370)
 
 [node name="Safespace" parent="." instance=ExtResource("3_sdsww")]
-position = Vector2(710, 308)
-rotation = 234.738
-radius = 300.0
+position = Vector2(737, 349)
+rotation = 154.965
+rotation_speed = 10.0
+inner_radius = 50.0
+outer_radius = 250.0
