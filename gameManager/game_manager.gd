@@ -6,6 +6,7 @@ var timerRunning: bool = false
 var game_over: bool = false
 var player: Node2D
 var nrAsteroids: int
+var nearMissBonus: int = 1
 @export var timeLabel: Label
 @export var scoreLabel: Label
 @export var game_over_hud: GameOverHud
@@ -24,6 +25,7 @@ func _ready() -> void:
 	Signalbus.connect("spawnAsteroid", increaseAsteroidCount)
 	Signalbus.connect("outOfSafety", _unsafe_area_entered)
 	Signalbus.connect("backInSafety", _safe_area_entered)
+	Signalbus.connect("nearmissSignal", updateScore.bind(nearMissBonus))
 	
 	grace_period_timer.timeout.connect(_on_player_died)
 	

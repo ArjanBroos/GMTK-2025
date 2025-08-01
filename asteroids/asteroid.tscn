@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3t20axtyp2bg"]
+[gd_scene load_steps=8 format=3 uid="uid://d3t20axtyp2bg"]
 
 [ext_resource type="Texture2D" uid="uid://djeto0mqb5pn4" path="res://asteroids/asteroid.svg" id="1_fn3cv"]
 [ext_resource type="Script" uid="uid://pocfg1nhh1sw" path="res://asteroids/asteroid.gd" id="1_mry8r"]
 [ext_resource type="Script" uid="uid://da5llttdmsvw4" path="res://components/hit_box.gd" id="3_5s5pr"]
+[ext_resource type="Script" uid="uid://bptba17fut7m1" path="res://components/near_miss_box.gd" id="4_cp6py"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fn3cv"]
 radius = 2.0
@@ -10,10 +11,14 @@ radius = 2.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_cp6py"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5s5pr"]
+radius = 30.0167
+
 [node name="Asteroid" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 12
 gravity_scale = 0.0
+linear_damp = 0.15
 script = ExtResource("1_mry8r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -36,5 +41,13 @@ shape = SubResource("CircleShape2D_cp6py")
 debug_color = Color(0.985896, 0.116401, 0, 0.42)
 
 [node name="VisibleOnScreen" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="NearMissBox" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("4_cp6py")
+metadata/_custom_type_script = "uid://bptba17fut7m1"
+
+[node name="NearMissCollisionShape" type="CollisionShape2D" parent="NearMissBox"]
+shape = SubResource("CircleShape2D_5s5pr")
 
 [connection signal="screen_exited" from="VisibleOnScreen" to="." method="_on_visible_on_screen_screen_exited"]
