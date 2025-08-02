@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dphb8dao47hrq"]
+
+[ext_resource type="Script" uid="uid://dkg6wjtof5o77" path="res://components/emit_particles_and_destroy.gd" id="1_gt538"]
+
+[node name="PlayerExplosion" type="Node2D" node_paths=PackedStringArray("particles")]
+script = ExtResource("1_gt538")
+particles = NodePath("CPUParticles2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.21
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.63
+initial_velocity_max = 46.88
+angular_velocity_max = 22.5
+scale_amount_min = 3.0
+scale_amount_max = 4.0
+color = Color(0.686275, 0, 0.835294, 1)

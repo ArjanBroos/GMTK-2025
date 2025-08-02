@@ -7,12 +7,15 @@ signal took_damage(amount: int) # For on hit effects
 signal died() # For determining whether player died
 
 var current_health: int
+var isDead: bool
 
 func _ready() -> void:
 	current_health = max_health
+	isDead = false
 
 func take_damage(amount: int) -> void:
 	current_health = max(0, current_health - amount)
 	took_damage.emit(amount)
-	if (current_health == 0):
+	if (current_health == 0 && !isDead):
+		isDead = true
 		died.emit()

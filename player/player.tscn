@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://5g3i4mhst5kb"]
+[gd_scene load_steps=8 format=3 uid="uid://5g3i4mhst5kb"]
 
 [ext_resource type="Script" uid="uid://cuk138uhfuit" path="res://player/player.gd" id="1_qjkh3"]
 [ext_resource type="Script" uid="uid://b3s0q2nv1375l" path="res://player/tether.gd" id="2_g6k8r"]
 [ext_resource type="Script" uid="uid://valb3o157auw" path="res://components/follow_cursor.gd" id="2_rkbax"]
+[ext_resource type="PackedScene" uid="uid://dphb8dao47hrq" path="res://player/player_explosion.tscn" id="3_g6k8r"]
 [ext_resource type="Script" uid="uid://c87y1h43er7n8" path="res://components/health.gd" id="3_yw30f"]
 [ext_resource type="Script" uid="uid://bfb6nj1lrv6ay" path="res://components/hurt_box.gd" id="4_qjkh3"]
 
@@ -36,9 +37,10 @@ width = 2.0
 position = Vector2(21, -21)
 script = ExtResource("1_qjkh3")
 health = NodePath("Health")
+explosion_scene = ExtResource("3_g6k8r")
 metadata/_custom_type_script = "uid://cuk138uhfuit"
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Player"]
+[node name="ExhaustParticles" type="CPUParticles2D" parent="Player"]
 position = Vector2(0, 16)
 rotation = 1.598
 amount = 2

@@ -8,7 +8,7 @@ var timerRunning: bool = false
 var game_over: bool = false
 var player: Node2D
 var nrAsteroids: int
-var deathStopTimeScale:float = 0.02
+var deathStopTimeScale:float = 0.2
 var deathStopSeconds:float = 2
 @export var timeLabel: Label
 @export var scoreLabel: Label
@@ -29,6 +29,7 @@ func _ready() -> void:
 	# connect signal to update score
 	Signalbus.connect("increaseScore", updateScore)
 	Signalbus.connect("playerDied", deathStopToggle)
+	Signalbus.playerDied.connect(_destroy_player)
 	Signalbus.connect("spawnAsteroid", increaseAsteroidCount)
 	Signalbus.connect("outOfSafety", _unsafe_area_entered)
 	Signalbus.connect("backInSafety", _safe_area_entered)
@@ -101,13 +102,13 @@ func deathStopToggle() -> void:
 	grace_period_timer.stop()
 	deathStopTimer.start(deathStopSeconds*deathStopTimeScale)
 
+func _destroy_player() -> void:
+	player.queue_free()
+
 func _on_player_died() -> void:
 	Engine.time_scale = 0
 	game_over_hud.visible = true
 	game_over = true
-	# TODO: not sure why the queue_free breaks the game in my implementation but it works without
-	#player.queue_free()
-
 
 func _on_player_wants_to_try_again() -> void:
 	game_over_hud.visible = false
