@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SpawnInfo" load_steps=2 format=3 uid="uid://bhjrsvh5wstdk"]
+
+[ext_resource type="Script" uid="uid://bx5hqjycq2lby" path="res://asteroids/spawn_info.gd" id="1_dcqoj"]
+
+[resource]
+script = ExtResource("1_dcqoj")
+interval = 10.0
+min_speed = 5000.0
+max_speed = 6000.0
+nrof_segments = 9
+radius = 50.0
+radius_noise = 0.3
+mass = 100.0
+metadata/_custom_type_script = "uid://bx5hqjycq2lby"

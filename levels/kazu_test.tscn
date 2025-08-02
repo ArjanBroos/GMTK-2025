@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cegnxgxnnp0s2"]
+[gd_scene load_steps=8 format=3 uid="uid://cegnxgxnnp0s2"]
 
 [ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="2_82evp"]
+[ext_resource type="Script" uid="uid://bx5hqjycq2lby" path="res://asteroids/spawn_info.gd" id="2_w66sx"]
 [ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="3_7rs05"]
+[ext_resource type="Resource" uid="uid://bujxxpltm0nkl" path="res://asteroids/spawn_infos/normies.tres" id="3_g4i53"]
 [ext_resource type="PackedScene" uid="uid://4x460bm5yske" path="res://safespace/safespace.tscn" id="3_sdsww"]
+[ext_resource type="Resource" uid="uid://bhjrsvh5wstdk" path="res://asteroids/spawn_infos/big_bois.tres" id="4_4gd1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82evp"]
 size = Vector2(105, 567.25)
@@ -12,6 +15,7 @@ size = Vector2(105, 567.25)
 [node name="Spawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("2_82evp")]
 position = Vector2(208, 228)
 spawn_area = NodePath("../SpawnArea1/CollisionShape2D")
+spawns = Array[ExtResource("2_w66sx")]([ExtResource("3_g4i53"), ExtResource("4_4gd1q")])
 
 [node name="SpawnArea1" type="Area2D" parent="."]
 
