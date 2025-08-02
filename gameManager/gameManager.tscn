@@ -65,3 +65,5 @@ visible = false
 
 [node name="GracePeriodTimer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="DeathStopTimer" type="Timer" parent="."]

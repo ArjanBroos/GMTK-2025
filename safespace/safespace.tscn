@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bya741h8qj5u7" path="res://safespace/safespace.gd" id="1_ky3af"]
 
 [node name="Safespace" type="Node2D"]
-rotation = 3.68264
+rotation = 45.5006
 script = ExtResource("1_ky3af")
 
 [node name="SafeArea" type="Area2D" parent="."]

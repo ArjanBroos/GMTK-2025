@@ -13,3 +13,5 @@ signal despawnAsteroid
 
 signal outOfSafety
 signal backInSafety
+
+signal nearmissSignal
