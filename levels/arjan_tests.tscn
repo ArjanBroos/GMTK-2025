@@ -21,17 +21,21 @@ pullFactor = 1000.0
 
 [node name="Asteroid" parent="." instance=ExtResource("2_hyu0f")]
 position = Vector2(507, 176)
+linear_damp = 0.15
 
 [node name="Asteroid2" parent="." instance=ExtResource("2_hyu0f")]
 position = Vector2(676, 122)
+linear_damp = 0.15
 direction_degrees = 110.0
 
 [node name="Asteroid3" parent="." instance=ExtResource("2_hyu0f")]
 position = Vector2(894, 223)
+linear_damp = 0.15
 direction_degrees = 170.0
 
 [node name="Asteroid4" parent="." instance=ExtResource("2_hyu0f")]
 position = Vector2(750, 495)
+linear_damp = 0.15
 direction_degrees = 220.0
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
