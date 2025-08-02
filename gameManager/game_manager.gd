@@ -34,7 +34,7 @@ func _ready() -> void:
 	Signalbus.connect("outOfSafety", _unsafe_area_entered)
 	Signalbus.connect("backInSafety", _safe_area_entered)
 	Signalbus.connect("nearmissSignal", _handle_near_miss)
-	
+
 	grace_period_timer.timeout.connect(deathStopToggle)
 	deathStopTimer.timeout.connect(_on_player_died)
 	

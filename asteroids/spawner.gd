@@ -17,7 +17,8 @@ func _ready() -> void:
 		spawn_timer = Timer.new()
 		add_child(spawn_timer)
 		
-		spawn_timer.wait_time = sp.interval
+		var spawn_variation = randf_range(0.9, 1.1)
+		spawn_timer.wait_time = sp.interval * spawn_variation
 		spawn_timer.timeout.connect(_on_spawn_timer_timeout.bind(sp))
 		
 		spawn_timer.start()

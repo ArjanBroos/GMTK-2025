@@ -78,6 +78,9 @@ func _ready() -> void:
 	_set_outer_line(shape)
 	_set_collisions(shape)
 
+	var tween = get_tree().create_tween()
+	tween.tween_property(outer_line, "modulate:a", 1, 0.15)
+
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var dirVec = Vector2.RIGHT.rotated(deg_to_rad(direction_degrees))
 	apply_central_force(dirVec * speed)
