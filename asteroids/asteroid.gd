@@ -13,8 +13,6 @@ const CURVE_SMOOTHING: float = 0.25
 @export var radius: float = 10.0
 @export var radius_noise: float = 0.3
 
-@onready var direction_line_editor: Line2D = $DirectionLineEditor
-
 @onready var outer_line: Line2D = $OuterLine
 @onready var body_collision: CollisionPolygon2D = $BodyCollision
 @onready var hitbox_collision: CollisionPolygon2D = $HitBox/Collision
