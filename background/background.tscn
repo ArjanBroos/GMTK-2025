@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr03li0o0632j"]
+
+[ext_resource type="Material" uid="uid://d24hpu16gjyt5" path="res://background/galaxy_shader.tres" id="1_p8qmt"]
+[ext_resource type="Texture2D" uid="uid://qbnfk3kxqh7m" path="res://background/white_square.jpg" id="2_eva80"]
+
+[node name="Background" type="TextureRect"]
+material = ExtResource("1_p8qmt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_eva80")
