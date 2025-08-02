@@ -31,7 +31,6 @@ func _add_position_noise(vec: Vector2) -> Vector2:
 	return vec + dirVec
 	
 func _on_spawn_timer_timeout(sp: SpawnInfo) -> void:
-	print("Spawn triggered for sp radius ", sp.radius)
 	# spawn an asteroid randomly in the spawn area
 	var spawnSize = spawn_area.shape.get_rect().size
 	var origin = spawn_area.global_position - (spawnSize / 2)

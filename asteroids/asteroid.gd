@@ -66,7 +66,6 @@ func _set_collisions(point: Array[Vector2]) -> void:
 	hitbox_collision.polygon = point
 
 func _init() -> void:
-	print("Creating with radius ", radius, " and noise ", radius_noise)
 	shape = _calculate_shape()
 
 func set_parameters(new_radius: float, new_radius_noise: float, new_nrof_segments: int) -> void:
@@ -84,16 +83,6 @@ func _ready() -> void:
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var dirVec = Vector2.RIGHT.rotated(deg_to_rad(direction_degrees))
 	apply_central_force(dirVec * speed)
-
-func _draw() -> void:
-	var dir = Vector2.RIGHT.rotated(deg_to_rad(direction_degrees)) * 50
-	direction_line_editor.points[1] = dir
-	
-func _process(_delta: float) -> void:
-	if Engine.is_editor_hint():
-		queue_redraw()
-	else:
-		direction_line_editor.visible = false
 
 func _determine_mirror_position(cur_pos: Vector2) -> Vector2:
 	var window = DisplayServer.window_get_size()
