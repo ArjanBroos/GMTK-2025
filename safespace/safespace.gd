@@ -15,7 +15,7 @@ var outer_radius: float = 250.0
 var arc_length: int = 15
 
 @export
-var pause_in_editor: bool = false
+var pause_in_editor: bool = true
 
 func _calculate_shape() -> Array[Vector2]:
 	var points: Array[Vector2] = []
