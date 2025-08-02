@@ -38,7 +38,24 @@ script = ExtResource("1_qjkh3")
 health = NodePath("Health")
 metadata/_custom_type_script = "uid://cuk138uhfuit"
 
-[node name="Line2D" type="Line2D" parent="Player"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Player"]
+position = Vector2(0, 16)
+rotation = 1.598
+amount = 2
+lifetime = 0.07
+randomness = 0.31
+emission_shape = 3
+emission_rect_extents = Vector2(2, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 23.44
+initial_velocity_max = 62.5
+angle_min = -22.5
+scale_amount_max = 2.0
+color = Color(1, 0.368627, 0.309804, 1)
+hue_variation_min = 0.03
+hue_variation_max = 0.48
+
+[node name="Visualization" type="Line2D" parent="Player"]
 position = Vector2(-72, 7)
 scale = Vector2(1.16591, 1.18069)
 points = PackedVector2Array(52.3198, 2.54088, 53.1775, -4.2348, 56.6083, -5.92872, 57.466, -14.3983, 61.7545, -16.9392, 66.043, -14.3983, 67.7584, -5.92872, 71.1892, -4.2348, 72.0469, 2.54088, 67, 2, 65.1853, 5.92872, 59.1814, 5.92872, 57, 2, 52.3198, 2.54088, 53.1775, -4.2348)
