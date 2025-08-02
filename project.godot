@@ -31,6 +31,7 @@ window/size/resizable=false
 2d_physics/layer_2="Hurtboxes"
 2d_physics/layer_3="GravityWells"
 2d_physics/layer_4="Asteroids"
+2d_physics/layer_5="NearMiss"
 2d_physics/layer_9="Layer 9"
 
 [rendering]

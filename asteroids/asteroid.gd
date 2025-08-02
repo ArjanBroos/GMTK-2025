@@ -72,7 +72,7 @@ func _ready() -> void:
 	_set_outer_line(shape)
 	_set_collisions(shape)
 
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var dirVec = Vector2.RIGHT.rotated(deg_to_rad(direction_degrees))
 	apply_central_force(dirVec * speed)
 

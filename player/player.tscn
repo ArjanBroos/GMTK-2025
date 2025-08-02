@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5g3i4mhst5kb"]
+[gd_scene load_steps=9 format=3 uid="uid://5g3i4mhst5kb"]
 
 [ext_resource type="Texture2D" uid="uid://hrun317j6v3h" path="res://player/player.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cuk138uhfuit" path="res://player/player.gd" id="1_qjkh3"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6k8r"]
 size = Vector2(30, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]
+radius = 32.0156
 
 [node name="PlayerHome" type="Node2D"]
 
@@ -44,3 +47,12 @@ metadata/_custom_type_script = "uid://bfb6nj1lrv6ay"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HurtBox"]
 shape = SubResource("RectangleShape2D_g6k8r")
+
+[node name="NearMissBox" type="Area2D" parent="Player"]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/NearMissBox"]
+shape = SubResource("CircleShape2D_g6k8r")
+
+[connection signal="body_exited" from="Player/NearMissBox" to="Tether" method="_on_near_miss_box_body_exited"]
