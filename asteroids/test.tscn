@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://8m3d85sxsi1f"]
+
+[ext_resource type="Script" uid="uid://bx7jjkohuvket" path="res://asteroids/test.gd" id="1_c5k36"]
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_c5k36")
+
+[node name="Shape" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionPolygon2D" parent="Shape"]
+polygon = PackedVector2Array(0, -73, 46, -66, 27, -38, 4, -40)
+
+[node name="VisibleShape" type="Line2D" parent="Shape"]
+z_index = -2
+points = PackedVector2Array(51.5544, 0, 78.2686, 10.0164, 84.8159, 13.0957, 85.7355, 13.699, 86.0873, 13.9779, 86.3669, 14.242, 86.5742, 14.4919, 86.7091, 14.7279, 86.7716, 14.9505, 86.7616, 15.1599, 86.679, 15.3567, 86.5236, 15.5411, 86.2954, 15.7137, 85.9944, 15.8748, 85.6203, 16.0247, 85.1732, 16.164, 84.0593, 16.412, 76.6628, 17.0549, 47.6017, 17.3256, 66.3812, 33.4368, 68.9453, 35.9252, 70.6167, 37.8302, 71.1113, 38.5689, 71.2722, 38.8857, 71.3751, 39.1678, 71.4196, 39.4154, 71.4055, 39.6289, 71.3325, 39.8084, 71.2001, 39.9541, 71.0082, 40.0665, 70.7563, 40.1457, 70.4442, 40.1919, 70.0716, 40.2054, 69.1434, 40.1354, 67.9692, 39.9377, 60.7619, 37.9099, 33.7698, 28.3363)
+closed = true
+width = 2.0
