@@ -1,15 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3t20axtyp2bg"]
+[gd_scene load_steps=5 format=3 uid="uid://d3t20axtyp2bg"]
 
-[ext_resource type="Texture2D" uid="uid://djeto0mqb5pn4" path="res://asteroids/asteroid.svg" id="1_fn3cv"]
 [ext_resource type="Script" uid="uid://pocfg1nhh1sw" path="res://asteroids/asteroid.gd" id="1_mry8r"]
 [ext_resource type="Script" uid="uid://da5llttdmsvw4" path="res://components/hit_box.gd" id="3_5s5pr"]
-[ext_resource type="Script" uid="uid://bptba17fut7m1" path="res://components/near_miss_box.gd" id="4_cp6py"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_fn3cv"]
-radius = 2.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_cp6py"]
-radius = 6.0
+[ext_resource type="Script" path="res://components/near_miss_box.gd" id="4_cp6py"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5s5pr"]
 radius = 30.0167
@@ -20,12 +13,9 @@ collision_mask = 12
 gravity_scale = 0.0
 linear_damp = 0.15
 script = ExtResource("1_mry8r")
+radius = 50.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_fn3cv")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_fn3cv")
+[node name="BodyCollision" type="CollisionPolygon2D" parent="."]
 
 [node name="DirectionLineEditor" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, -2.18557e-06, 50)
@@ -36,18 +26,20 @@ collision_mask = 2
 script = ExtResource("3_5s5pr")
 metadata/_custom_type_script = "uid://da5llttdmsvw4"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_cp6py")
-debug_color = Color(0.985896, 0.116401, 0, 0.42)
+[node name="Collision" type="CollisionPolygon2D" parent="HitBox"]
 
 [node name="VisibleOnScreen" type="VisibleOnScreenEnabler2D" parent="."]
 
 [node name="NearMissBox" type="Area2D" parent="."]
 collision_mask = 2
 script = ExtResource("4_cp6py")
-metadata/_custom_type_script = "uid://bptba17fut7m1"
 
 [node name="NearMissCollisionShape" type="CollisionShape2D" parent="NearMissBox"]
 shape = SubResource("CircleShape2D_5s5pr")
+
+[node name="OuterLine" type="Line2D" parent="."]
+closed = true
+width = 2.0
+default_color = Color(0, 0.388235, 0, 1)
 
 [connection signal="screen_exited" from="VisibleOnScreen" to="." method="_on_visible_on_screen_screen_exited"]
