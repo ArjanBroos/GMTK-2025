@@ -1,12 +1,13 @@
 extends Node
 
+const NEAR_MISS_SCORE: int = 1
+
 var playerScore: int = 0
 var gameTimer: float = 0.0
 var timerRunning: bool = false
 var game_over: bool = false
 var player: Node2D
 var nrAsteroids: int
-var nearMissBonus: int = 1
 var deathStopTimeScale:float = 0.02
 var deathStopSeconds:float = 2
 @export var timeLabel: Label
@@ -21,6 +22,8 @@ var deathStopSeconds:float = 2
 
 @onready var deathStopTimer: Timer = $DeathStopTimer
 
+var nearMissScene = preload("res://HUD/near_miss.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect signal to update score
@@ -29,7 +32,7 @@ func _ready() -> void:
 	Signalbus.connect("spawnAsteroid", increaseAsteroidCount)
 	Signalbus.connect("outOfSafety", _unsafe_area_entered)
 	Signalbus.connect("backInSafety", _safe_area_entered)
-	Signalbus.connect("nearmissSignal", updateScore.bind(nearMissBonus))
+	Signalbus.connect("nearmissSignal", _handle_near_miss)
 	
 	grace_period_timer.timeout.connect(deathStopToggle)
 	deathStopTimer.timeout.connect(_on_player_died)
@@ -55,6 +58,13 @@ func updateScore(x:int) -> int:
 	playerScore = playerScore + x
 	scoreLabel.text = "Score: " + str(playerScore)
 	return playerScore
+
+func _handle_near_miss(eventPos: Vector2) -> void:
+	var nearMiss: Node2D = nearMissScene.instantiate()
+	add_child(nearMiss)
+	# offset the message to the top right
+	nearMiss.global_position = eventPos + Vector2(20,-20)
+	updateScore(NEAR_MISS_SCORE)
 
 # reset the timer
 func startTimer() -> void:

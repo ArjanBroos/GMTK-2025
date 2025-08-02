@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4443ods31rjt"]
+
+[ext_resource type="Script" uid="uid://85qmrixthmvi" path="res://HUD/near_miss.gd" id="1_d6o4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d6o4h"]
+font_size = 12
+
+[node name="NearMiss" type="Node2D"]
+script = ExtResource("1_d6o4h")
+
+[node name="BonusMessage" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Near miss!    +1"
+label_settings = SubResource("LabelSettings_d6o4h")

@@ -23,5 +23,5 @@ func _update_line() -> void:
 	var proportion = distance / max_length
 	default_color = Color(1.0, 1.0 - proportion, 1.0 - proportion, proportion*proportion / 2)
 
-func _on_near_miss_box_body_exited(body: Node2D) -> void:
-	Signalbus.nearmissSignal.emit()
+func _on_near_miss_box_body_exited(_body: Node2D) -> void:
+	Signalbus.nearmissSignal.emit(player.global_position)
