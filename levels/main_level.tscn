@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccetrmf5vhby0"]
+[gd_scene load_steps=12 format=3 uid="uid://ccetrmf5vhby0"]
 
 [ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="1_0vhbo"]
 [ext_resource type="PackedScene" uid="uid://bwsjsl424h3v0" path="res://gravity_well/gravity_well.tscn" id="3_ldao0"]
 [ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="4_55n5f"]
 [ext_resource type="PackedScene" uid="uid://bmpyud5b00pej" path="res://soundManager/backgroundMusic/backgroundMusic.tscn" id="4_wg11f"]
+[ext_resource type="Script" uid="uid://bx5hqjycq2lby" path="res://asteroids/spawn_info.gd" id="4_yb8kn"]
+[ext_resource type="Resource" uid="uid://bujxxpltm0nkl" path="res://asteroids/spawn_infos/normies.tres" id="5_43k3a"]
+[ext_resource type="Resource" uid="uid://bhjrsvh5wstdk" path="res://asteroids/spawn_infos/big_bois.tres" id="6_43k3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55n5f"]
 size = Vector2(1247.5, 39.5)
@@ -33,7 +36,7 @@ pullFactor = 2500.0
 [node name="TopSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
 position = Vector2(116, -172)
 spawn_area = NodePath("SpawnArea/CollisionShape2D")
-interval = 3.0
+spawns = Array[ExtResource("4_yb8kn")]([ExtResource("5_43k3a"), ExtResource("6_43k3a")])
 
 [node name="SpawnArea" type="Area2D" parent="TopSpawner"]
 position = Vector2(-116, 172)
@@ -45,7 +48,7 @@ shape = SubResource("RectangleShape2D_55n5f")
 [node name="RightSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
 position = Vector2(1463, 310)
 spawn_area = NodePath("SpawnArea/CollisionShape2D")
-interval = 3.2
+spawns = Array[ExtResource("4_yb8kn")]([ExtResource("5_43k3a")])
 
 [node name="SpawnArea" type="Area2D" parent="RightSpawner"]
 
@@ -56,7 +59,7 @@ shape = SubResource("RectangleShape2D_wg11f")
 [node name="BottomSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
 position = Vector2(638, 873)
 spawn_area = NodePath("SpawnArea/CollisionShape2D")
-interval = 3.15
+spawns = Array[ExtResource("4_yb8kn")]([ExtResource("5_43k3a")])
 
 [node name="SpawnArea" type="Area2D" parent="BottomSpawner"]
 
@@ -67,7 +70,7 @@ shape = SubResource("RectangleShape2D_yb8kn")
 [node name="LeftSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
 position = Vector2(-161, 356)
 spawn_area = NodePath("SpawnArea/CollisionShape2D")
-interval = 2.0
+spawns = Array[ExtResource("4_yb8kn")]([ExtResource("5_43k3a")])
 
 [node name="SpawnArea" type="Area2D" parent="LeftSpawner"]
 

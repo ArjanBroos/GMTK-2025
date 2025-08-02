@@ -23,6 +23,8 @@ var raw_points: Array[Vector2] = []
 var shape: Array[Vector2] = []
 
 func _calculate_shape() -> Array[Vector2]:
+	raw_points.clear()
+	
 	var step = (2 * PI) / nrof_segments
 
 	# calculate a circle of points, adding noise for each point to make mountains and valleys
@@ -64,6 +66,13 @@ func _set_collisions(point: Array[Vector2]) -> void:
 	hitbox_collision.polygon = point
 
 func _init() -> void:
+	print("Creating with radius ", radius, " and noise ", radius_noise)
+	shape = _calculate_shape()
+
+func set_parameters(new_radius: float, new_radius_noise: float, new_nrof_segments: int) -> void:
+	radius = new_radius
+	radius_noise = new_radius_noise
+	nrof_segments = new_nrof_segments
 	shape = _calculate_shape()
 
 func _ready() -> void:

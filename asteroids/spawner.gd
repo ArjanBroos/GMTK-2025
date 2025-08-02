@@ -8,22 +8,19 @@ var asteroid_scene = preload("res://asteroids/asteroid.tscn")
 
 @export
 var spawn_area: CollisionShape2D
-@export
-var interval: float = 1.0
-@export
-var min_speed: float = 50.0
-@export
-var max_speed: float = 120.0
 
-func _ready() -> void:	
-	# set up the timer for spawning the asteroids
-	spawn_timer = Timer.new()
-	add_child(spawn_timer)
-	
-	spawn_timer.wait_time = interval
-	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
-	
-	spawn_timer.start()
+@export var spawns: Array[SpawnInfo] = []
+
+func _ready() -> void:
+	for sp in spawns:
+		# set up the timer for spawning the asteroids
+		spawn_timer = Timer.new()
+		add_child(spawn_timer)
+		
+		spawn_timer.wait_time = sp.interval
+		spawn_timer.timeout.connect(_on_spawn_timer_timeout.bind(sp))
+		
+		spawn_timer.start()
 	
 func _add_position_noise(vec: Vector2) -> Vector2:
 	var randomRadius = randf() * POSITION_NOISE
@@ -33,7 +30,8 @@ func _add_position_noise(vec: Vector2) -> Vector2:
 	
 	return vec + dirVec
 	
-func _on_spawn_timer_timeout() -> void:
+func _on_spawn_timer_timeout(sp: SpawnInfo) -> void:
+	print("Spawn triggered for sp radius ", sp.radius)
 	# spawn an asteroid randomly in the spawn area
 	var spawnSize = spawn_area.shape.get_rect().size
 	var origin = spawn_area.global_position - (spawnSize / 2)
@@ -41,12 +39,15 @@ func _on_spawn_timer_timeout() -> void:
 	var randY = origin.y + (randf() * spawnSize.y)
 	
 	var asteroidInstance: Asteroid = asteroid_scene.instantiate()
+	asteroidInstance.set_parameters(sp.radius, sp.radius_noise, sp.nrof_segments)
+	asteroidInstance.speed = sp.min_speed + (randf() * (sp.max_speed - sp.min_speed))
+	asteroidInstance.mass = sp.mass
+
 	add_child(asteroidInstance)
 	# Emit signal for spawning asteroid
 	Signalbus.spawnAsteroid.emit()
 	
 	asteroidInstance.global_position = Vector2(randX, randY)
-	asteroidInstance.speed = min_speed + (randf() * (max_speed - min_speed))
 	
 	# set the direction of the spawner compared to the center of the window
 	# used for the initial direction of spawned asteroids
