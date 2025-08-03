@@ -18,6 +18,7 @@ extends Node
 var soundEffectVolume: float = -20
 var nearMissArray: Array[AudioStream] 
 var nextMissSound: AudioStream
+var baseVolume: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +29,7 @@ func _ready() -> void:
 	Signalbus.connect("gravityWellSpawn", playGravityWellSound)
 	Signalbus.connect("multiplierSoundPlay", playMultiplierSound)
 	Signalbus.connect("shieldAvailable", playShieldSound)
+	baseVolume = anchorAudioPlayer.volume_db
 
 func playNearMiss(_eventPos: Vector2) -> void:
 	getNextNearMissSound()
@@ -38,22 +40,27 @@ func playNearMiss(_eventPos: Vector2) -> void:
 func getNextNearMissSound() -> void:
 	nextMissSound = nearMissArray.pick_random()
 
-func playAnchorSound() -> void:
+func playAnchorSound() -> void:	
+	anchorAudioPlayer.volume_db = baseVolume
 	anchorAudioPlayer.stream = anchorSound
 	anchorAudioPlayer.playing = true
 	anchorAudioPlayer.play()
 
 func playGravityWellSound() -> void:
+	anchorAudioPlayer.volume_db = baseVolume
 	anchorAudioPlayer.stream = gravityWellSound
 	anchorAudioPlayer.playing = true
 	anchorAudioPlayer.play()
 
 func playMultiplierSound() -> void:
+	anchorAudioPlayer.volume_db = baseVolume
+	anchorAudioPlayer.volume_db -= 20
 	anchorAudioPlayer.stream = multiplierSound
 	anchorAudioPlayer.playing = true
 	anchorAudioPlayer.play()
 
 func playShieldSound() -> void:
+	anchorAudioPlayer.volume_db = baseVolume
 	anchorAudioPlayer.stream = shieldSound
 	anchorAudioPlayer.playing = true
 	anchorAudioPlayer.play()
