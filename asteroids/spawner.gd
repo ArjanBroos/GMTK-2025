@@ -2,8 +2,8 @@ extends Node2D
 class_name Spawner
 
 const POSITION_NOISE: float = 100.0
+const TIMER_INCREASE: float = 1.0
 
-var spawn_timer: Timer
 var asteroid_scene = preload("res://asteroids/asteroid.tscn")
 
 @export
@@ -17,18 +17,18 @@ func _ready() -> void:
 	one_shot_timer.wait_time = randf_range(0, 0.3)
 	one_shot_timer.one_shot = true
 	one_shot_timer.autostart = true
-	one_shot_timer.timeout.connect(_on_spawn_timer_timeout.bind(spawns[0]))
+	one_shot_timer.timeout.connect(_spawn_asteroid.bind(spawns[0]))
 	add_child(one_shot_timer)
 
 	for sp in spawns:
 
 		# set up the timer for spawning the asteroids
-		spawn_timer = Timer.new()
+		var spawn_timer = Timer.new()
 		add_child(spawn_timer)
 		
 		var spawn_variation = randf_range(0.9, 1.1)
 		spawn_timer.wait_time = sp.interval * spawn_variation
-		spawn_timer.timeout.connect(_on_spawn_timer_timeout.bind(sp))
+		spawn_timer.timeout.connect(_on_spawn_timer_timeout.bind(sp, spawn_timer))
 		
 		spawn_timer.start()
 	
@@ -39,8 +39,8 @@ func _add_position_noise(vec: Vector2) -> Vector2:
 	var dirVec = Vector2(cos(randomStep), sin(randomStep)) * randomRadius
 	
 	return vec + dirVec
-	
-func _on_spawn_timer_timeout(sp: SpawnInfo) -> void:
+
+func _spawn_asteroid(sp: SpawnInfo) -> void:
 	# spawn an asteroid randomly in the spawn area
 	var spawnSize = spawn_area.shape.get_rect().size
 	var origin = spawn_area.global_position - (spawnSize / 2)
@@ -64,3 +64,9 @@ func _on_spawn_timer_timeout(sp: SpawnInfo) -> void:
 	var center = Vector2(window_size.x / 2, window_size.y / 2)
 	center = _add_position_noise(center)
 	asteroidInstance.direction_degrees = rad_to_deg(asteroidInstance.global_position.angle_to_point(center))
+	
+func _on_spawn_timer_timeout(sp: SpawnInfo, timer: Timer) -> void:
+	_spawn_asteroid(sp)
+
+	timer.wait_time = timer.wait_time + TIMER_INCREASE
+	timer.start(timer.wait_time)
