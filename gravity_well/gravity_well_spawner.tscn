@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl1ovutat8l5l"]
+
+[ext_resource type="Script" uid="uid://cf3feivywx2n8" path="res://gravity_well/gravity_well_spawner.gd" id="1_31xs5"]
+[ext_resource type="PackedScene" uid="uid://bwsjsl424h3v0" path="res://gravity_well/gravity_well.tscn" id="2_15wqo"]
+
+[node name="GravityWellSpawner" type="Area2D" node_paths=PackedStringArray("initial_spawn_timer", "inter_spawn_timer")]
+script = ExtResource("1_31xs5")
+initial_spawn_timer = NodePath("InitialSpawnTimer")
+inter_spawn_timer = NodePath("InterSpawnTimer")
+gravity_well_scene = ExtResource("2_15wqo")
+
+[node name="InitialSpawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="InterSpawnTimer" type="Timer" parent="."]
+wait_time = 10.0

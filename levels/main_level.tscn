@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccetrmf5vhby0"]
+[gd_scene load_steps=15 format=3 uid="uid://ccetrmf5vhby0"]
 
 [ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="1_0vhbo"]
-[ext_resource type="PackedScene" uid="uid://bwsjsl424h3v0" path="res://gravity_well/gravity_well.tscn" id="3_ldao0"]
 [ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="4_55n5f"]
 [ext_resource type="PackedScene" uid="uid://bmpyud5b00pej" path="res://soundManager/backgroundMusic/backgroundMusic.tscn" id="4_wg11f"]
 [ext_resource type="Script" uid="uid://bx5hqjycq2lby" path="res://asteroids/spawn_info.gd" id="4_yb8kn"]
 [ext_resource type="Resource" uid="uid://bujxxpltm0nkl" path="res://asteroids/spawn_infos/normies.tres" id="5_43k3a"]
 [ext_resource type="Resource" uid="uid://bhjrsvh5wstdk" path="res://asteroids/spawn_infos/big_bois.tres" id="6_43k3a"]
 [ext_resource type="PackedScene" uid="uid://dr03li0o0632j" path="res://background/background.tscn" id="8_ttu8v"]
+[ext_resource type="PackedScene" uid="uid://cl1ovutat8l5l" path="res://gravity_well/gravity_well_spawner.tscn" id="9_5br84"]
 [ext_resource type="PackedScene" uid="uid://bwlmv3tepdotc" path="res://Camera/camera_2d.tscn" id="9_ggk2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55n5f"]
@@ -22,6 +22,9 @@ size = Vector2(1259, 39.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43k3a"]
 size = Vector2(46, 594.75)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arlwx"]
+size = Vector2(1033, 490)
+
 [node name="MainLevel" type="Node2D"]
 
 [node name="Background" parent="." instance=ExtResource("8_ttu8v")]
@@ -35,9 +38,6 @@ player_spawn_point = NodePath("../PlayerSpawnPoint")
 retry_scene_path = "uid://ccetrmf5vhby0"
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
-position = Vector2(640, 360)
-
-[node name="GravityWell" parent="." instance=ExtResource("3_ldao0")]
 position = Vector2(640, 360)
 
 [node name="TopSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("4_55n5f")]
@@ -89,3 +89,11 @@ shape = SubResource("RectangleShape2D_43k3a")
 
 [node name="Camera2D" parent="." instance=ExtResource("9_ggk2x")]
 anchor_mode = 0
+
+[node name="GravityWellSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("9_5br84")]
+position = Vector2(640, 360)
+spawn_area = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityWellSpawner"]
+position = Vector2(-7.5, -4)
+shape = SubResource("RectangleShape2D_arlwx")

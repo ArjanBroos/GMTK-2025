@@ -21,7 +21,7 @@ points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
 script = ExtResource("2_g6k8r")
 player = NodePath("../Player")
-max_length = 250.0
+max_length = 350.0
 anchor = NodePath("../Anchor")
 tether_activation_timer = NodePath("../TetherActivationTimer")
 
@@ -121,7 +121,7 @@ wait_time = 2.5
 one_shot = true
 
 [node name="TetherActivationTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 
