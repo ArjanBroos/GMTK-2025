@@ -2,7 +2,7 @@ class_name GravityWell
 extends Node2D
 
 @export var area: Area2D
-@export var pullFactor: float = 300.0
+@export var pullFactor: float = 1500.0
 
 var affectedAsteroids: Array[Asteroid]
 
@@ -24,4 +24,4 @@ func _on_body_exited(asteroid: Asteroid) -> void:
 func _determine_force(asteroid: Asteroid) -> Vector2:
 	var direction = asteroid.global_position.direction_to(global_position)
 	var distance = asteroid.global_position.distance_to(global_position)
-	return (pullFactor / distance*distance) * direction
+	return (pullFactor / distance*distance) * (2 * direction + asteroid.linear_velocity.normalized()).normalized()
