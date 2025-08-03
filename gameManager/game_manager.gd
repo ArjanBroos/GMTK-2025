@@ -1,6 +1,7 @@
 extends Node
 
 const NEAR_MISS_SCORE: int = 10
+const BASE_SCORE_MULTIPLIER: int = 1
 
 var playerScore: int = 0
 var gameTimer: float = 0.0
@@ -10,6 +11,10 @@ var player: Node2D
 var nrAsteroids: int
 var deathStopTimeScale:float = 0.2
 var deathStopSeconds:float = 2
+
+var score_multiplier_active: bool = false
+var score_multiplier: int = 1
+
 @export var timeLabel: Label
 @export var scoreLabel: Label
 @export var game_over_hud: GameOverHud
@@ -18,8 +23,9 @@ var deathStopSeconds:float = 2
 @export var player_scene: PackedScene
 @export_file("*.tscn") var retry_scene_path: String
 
-@onready var unsafe_label: Label = $GUI/unsafeLabel
-@onready var grace_period_timer: Timer = $GracePeriodTimer
+@onready var multiplier_label: Label = $GUI/multiplierLabel
+@onready var multiplier_timer: Timer = $MultiplierTimer
+@onready var multiplier_animation: AnimationPlayer = $GUI/MultiplierAnimation
 
 @onready var deathStopTimer: Timer = $DeathStopTimer
 
@@ -34,13 +40,13 @@ func _ready() -> void:
 	Signalbus.connect("playerDied", deathStopToggle)
 	Signalbus.playerDied.connect(_destroy_player)
 	Signalbus.connect("spawnAsteroid", increaseAsteroidCount)
-	Signalbus.connect("outOfSafety", _unsafe_area_entered)
-	Signalbus.connect("backInSafety", _safe_area_entered)
+	Signalbus.connect("in_multiplier_area", _multiplier_area_entered)
+	Signalbus.connect("out_multiplier_area", _multiplier_area_exited)
 	Signalbus.connect("nearmissSignal", _handle_near_miss)
 	Signalbus.connect("shieldAvailable", _on_shield_available)
 	Signalbus.connect("shieldUnavailable", _on_shield_unavailable)
 
-	grace_period_timer.timeout.connect(deathStopToggle)
+	multiplier_timer.timeout.connect(_increase_multiplier)
 	deathStopTimer.timeout.connect(_on_player_died)
 	
 	game_over_hud.player_wants_to_try_again.connect(_on_player_wants_to_try_again)
@@ -67,13 +73,18 @@ func resetScore() -> void:
 func updateScore(x:int) -> int:
 	if game_over:
 		return playerScore
+
+	if score_multiplier_active:
+		x = x * score_multiplier
 		
 	playerScore = playerScore + x
 	scoreLabel.text = "Score: " + str(playerScore)
 	return playerScore
 
 func _handle_near_miss(eventPos: Vector2) -> void:
-	var nearMiss: Node2D = nearMissScene.instantiate()
+	var nearMiss: NearMiss = nearMissScene.instantiate()
+	nearMiss.set_score(NEAR_MISS_SCORE * score_multiplier)	
+
 	add_child(nearMiss)
 	# offset the message to the top right
 	nearMiss.global_position = eventPos + Vector2(20,-20)
@@ -111,7 +122,6 @@ func stopTimer() -> void:
 func deathStopToggle() -> void:
 	Engine.time_scale = deathStopTimeScale
 	stopTimer()
-	grace_period_timer.stop()
 	deathStopTimer.start(deathStopSeconds*deathStopTimeScale)
 	Signalbus.deathShake.emit()
 
@@ -141,9 +151,6 @@ func _spawn_player() -> void:
 func _process(delta: float) -> void:
 	if timerRunning:
 		updateTimer(delta)
-	if !grace_period_timer.is_stopped() && unsafe_label.visible:
-		unsafe_label.text = "Warning!
-Unsafe area entered! " + str("%0.2f" % (grace_period_timer.time_left))
 
 # Function to track asteroid count, also increases the music stage at certain amounts
 func increaseAsteroidCount() -> void:
@@ -152,10 +159,26 @@ func increaseAsteroidCount() -> void:
 	if nrAsteroids == 5 || nrAsteroids == 10:
 		Signalbus.increaseMusicStage.emit()
 		
-func _unsafe_area_entered() -> void:
-	unsafe_label.visible = true
-	grace_period_timer.start()
+func _multiplier_area_entered() -> void:
+	score_multiplier_active = true
+	score_multiplier = BASE_SCORE_MULTIPLIER + 1
+
+	multiplier_label.text = "x%s" % score_multiplier
+	multiplier_label.visible = true
+	multiplier_timer.start()
 	
-func _safe_area_entered() -> void:
-	unsafe_label.visible = false
-	grace_period_timer.stop()
+func _multiplier_area_exited() -> void:
+	score_multiplier_active = false
+	multiplier_label.visible = false
+	multiplier_timer.stop()
+	score_multiplier = BASE_SCORE_MULTIPLIER
+
+func _increase_multiplier() -> void:
+	multiplier_animation.play("boom")
+	multiplier_animation.animation_finished.connect(_play_wiggle_anim)
+	score_multiplier = score_multiplier + 1
+	multiplier_label.text = "x%s" % score_multiplier
+
+func _play_wiggle_anim(animation_name: String) -> void:
+	if animation_name == "boom":
+		multiplier_animation.play("wiggle")

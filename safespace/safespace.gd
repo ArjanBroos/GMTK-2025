@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 		rotate(deg_to_rad(rotation_speed / 100))
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	Signalbus.backInSafety.emit()
+	Signalbus.in_multiplier_area.emit()
 
 func _on_safe_area_area_exited(area: Area2D) -> void:
-	Signalbus.outOfSafety.emit()
+	Signalbus.out_multiplier_area.emit()
