@@ -115,6 +115,13 @@ libraries = {
 }
 autoplay = "wiggle"
 
+[node name="LMBLabel" type="Label" parent="GUI"]
+offset_left = 1178.0
+offset_top = 125.0
+offset_right = 1218.0
+offset_bottom = 148.0
+text = "LMB"
+
 [node name="GameOver" parent="." instance=ExtResource("4_op76p")]
 visible = false
 
