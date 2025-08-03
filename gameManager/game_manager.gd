@@ -22,6 +22,8 @@ var deathStopSeconds:float = 2
 
 @onready var deathStopTimer: Timer = $DeathStopTimer
 
+@onready var shield_availability_icon: Line2D = $GUI/ShieldAvailabilityIcon
+
 var nearMissScene = preload("res://HUD/near_miss.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -34,6 +36,10 @@ func _ready() -> void:
 	Signalbus.connect("outOfSafety", _unsafe_area_entered)
 	Signalbus.connect("backInSafety", _safe_area_entered)
 	Signalbus.connect("nearmissSignal", _handle_near_miss)
+	Signalbus.connect("shieldAvailable", _on_shield_available)
+	Signalbus.connect("shieldUnavailable", _on_shield_unavailable)
+
+	shield_availability_icon.points = _calculate_shield_outline()
 
 	grace_period_timer.timeout.connect(deathStopToggle)
 	deathStopTimer.timeout.connect(_on_player_died)
@@ -45,6 +51,29 @@ func _ready() -> void:
 	_spawn_player()
 	nrAsteroids = 0
 	Engine.time_scale = 1
+
+func _calculate_shield_outline() -> Array[Vector2]:
+	var points: Array[Vector2] = []
+
+	# calculate shield outline
+	var segments = 22
+	var step = (2 * PI) / segments
+	var radius = 20
+
+	# calculate a circle of points, adding noise for each point to make mountains and valleys
+	for i in range(segments):
+		var vec = Vector2(cos(i * step) * radius, sin(i * step) * radius)
+		points.append(vec)
+
+	return points
+
+func _on_shield_available() -> void:
+	print("shield available received")
+	shield_availability_icon.default_color = Color("0c48ff")
+
+func _on_shield_unavailable() -> void:
+	print("shield not available received")
+	shield_availability_icon.default_color = Color("635b5f")
 
 # Function sets the player score to 0
 func resetScore() -> void:

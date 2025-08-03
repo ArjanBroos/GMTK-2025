@@ -60,6 +60,12 @@ Unsafe area entered!"
 label_settings = SubResource("LabelSettings_op76p")
 horizontal_alignment = 1
 
+[node name="ShieldAvailabilityIcon" type="Line2D" parent="GUI"]
+position = Vector2(50, 670)
+closed = true
+width = 2.0
+default_color = Color(0.0470588, 0.282353, 1, 1)
+
 [node name="GameOver" parent="." instance=ExtResource("4_op76p")]
 visible = false
 

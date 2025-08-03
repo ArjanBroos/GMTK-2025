@@ -12,6 +12,7 @@ extends Line2D
 func _ready() -> void:
 	_update_line()
 	shield_timer.timeout.connect(_despawn_shield)
+	shield_cooldown_timer.timeout.connect(_restore_shield_availability)
 
 	# calculate shield outline
 	var segments = 22
@@ -51,10 +52,14 @@ func _spawn_shield() -> void:
 		shield_outline.visible = true
 		shield_timer.start()
 		shield_cooldown_timer.start()
+		Signalbus.shieldUnavailable.emit()
 
 func _despawn_shield() -> void:
 	shield_collision_shape.disabled = true
 	shield_outline.visible = false
+
+func _restore_shield_availability() -> void:
+	Signalbus.shieldAvailable.emit()
 
 func _on_shield_box_body_entered(body: Node2D) -> void:
 	if body is Asteroid:
