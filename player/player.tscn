@@ -16,7 +16,7 @@ radius = 26.0192
 
 [node name="PlayerHome" type="Node2D"]
 
-[node name="Tether" type="Line2D" parent="." node_paths=PackedStringArray("player", "anchor", "tether_activation_timer")]
+[node name="Tether" type="Line2D" parent="." node_paths=PackedStringArray("player", "anchor", "tether_activation_timer", "shield_box")]
 points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
 script = ExtResource("2_g6k8r")
@@ -24,6 +24,7 @@ player = NodePath("../Player")
 max_length = 350.0
 anchor = NodePath("../Anchor")
 tether_activation_timer = NodePath("../TetherActivationTimer")
+shield_box = NodePath("../Player/ShieldBox")
 
 [node name="Anchor" type="Node2D" parent="."]
 

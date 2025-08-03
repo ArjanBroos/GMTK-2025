@@ -6,6 +6,7 @@ extends Line2D
 @export var activation_period_in_seconds: float = 5.0
 @export var anchor: Node2D
 @export var tether_activation_timer: Timer
+@export var shield_box: Area2D
 
 var current_length
 var activation_period_left
@@ -86,6 +87,7 @@ func _spawn_shield() -> void:
 		Signalbus.shieldUnavailable.emit()
 		visualization_fill.color = Color("00acd4")
 		visualization_fill.modulate.a = 0
+		_destroy_stuff_already_in_shield
 
 		var tween = create_tween()
 		tween.tween_property(visualization_fill, "modulate:a", 1, shield_cooldown_timer.wait_time)
@@ -97,6 +99,11 @@ func _despawn_shield() -> void:
 func _restore_shield_availability() -> void:
 	visualization_fill.color = Color("d955ff")
 	Signalbus.shieldAvailable.emit()
+
+func _destroy_stuff_already_in_shield() -> void:
+	var overlapping_bodies = shield_box.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		_on_shield_box_body_entered(body)
 
 func _on_shield_box_body_entered(body: Node2D) -> void:
 	if body is Asteroid:
