@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bwsjsl424h3v0" path="res://gravity_well/gravity_well.tscn" id="3_ldao0"]
 [ext_resource type="PackedScene" uid="uid://cdewgi8ppc6qi" path="res://asteroids/spawner.tscn" id="4_55n5f"]
 [ext_resource type="PackedScene" uid="uid://bmpyud5b00pej" path="res://soundManager/backgroundMusic/backgroundMusic.tscn" id="4_wg11f"]
-[ext_resource type="Script" path="res://asteroids/spawn_info.gd" id="4_yb8kn"]
+[ext_resource type="Script" uid="uid://bx5hqjycq2lby" path="res://asteroids/spawn_info.gd" id="4_yb8kn"]
 [ext_resource type="Resource" uid="uid://bujxxpltm0nkl" path="res://asteroids/spawn_infos/normies.tres" id="5_43k3a"]
 [ext_resource type="Resource" uid="uid://bhjrsvh5wstdk" path="res://asteroids/spawn_infos/big_bois.tres" id="6_43k3a"]
 
