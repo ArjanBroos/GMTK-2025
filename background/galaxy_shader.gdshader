@@ -1,51 +1,76 @@
 shader_type canvas_item;
 
-uniform int arms = 8;
-uniform int squares_per_arm = 12;
-uniform float swirl_speed = 1.0;
-uniform float square_size = 0.01;
-uniform float min_brightness = 0.3; // Dim stars
-uniform float max_brightness = 1.0; // Bright stars
-uniform float arm_jitter = 0.03;    // Random offset from arm
+uniform vec3 star_color = vec3(0.0, 0.1, 0.2);
+uniform float scale = 100.0;
+uniform float rot_speed = 1.0;
+uniform float alpha = 0.2;
+uniform float shine = 2.0;
 
-float rand(vec2 co) {
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+#define ENABLE_SHINE true
+#define ENABLE_SPIRAL true
+
+float rand(in vec2 st) {
+  vec2 r = fract(sin(st) * 2.7644437);
+  return fract(r.y * 276.44437 + r.x);
+}
+
+float particles(in vec2 st) {
+  float r = rand(floor(st));
+  return 0.00 + smoothstep(0.995, 1.0, r) * max(0.0, sin(r * 34433.0 + TIME));
+}
+
+vec3 avg(in vec2 st, in float a) {
+  #define p(st) particles(st)
+  vec2 A = vec2(0.0, a);
+  return star_color * (p(st) + p(st + A) + p(st + A.yx) + p(st - A) + p(st - A.yx));
+}
+
+vec3 stars(in vec2 st) {
+  vec3 color = vec3(0.0);
+
+  if (ENABLE_SHINE) {
+	for (float i = 5.0; i > 0.0; --i) {
+		color += mix(color, avg(st, i), 1.5);
+  	}
+  }
+
+  return shine * color + p(st);
 }
 
 void fragment() {
-    vec2 uv = UV;
-    vec2 center = vec2(0.5);
-    float t = TIME * swirl_speed;
-    float intensity = 0.0;
+	// Normalize uv
+	vec2 uv = SCREEN_UV.xy;
+	float aspect_ratio = (SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y);
+	uv.x /= aspect_ratio;
 
-    for (int a = 0; a < arms; a++) {
-        float base_angle = float(a) * 6.2831 / float(arms); // 2π/arms
+	// Center it
+	vec2 st = (uv - vec2(0.5 / aspect_ratio, 0.5));
+  	st *= scale;
 
-        for (int s = 0; s < squares_per_arm; s++) {
-            float fi = float(s);
-            float radius = (fi + 1.0) / float(squares_per_arm);
-            float spiral_twist = radius * 2.0;
-            float angle = base_angle + spiral_twist + t;
+	// Star effect
+	vec3 color;
+    if (ENABLE_SPIRAL) {
+			  	// --- Spiral Transformation Begin ---
+	  	float r = length(st);
+	  	float angle = atan(st.y, st.x);
 
-            vec2 pos = center + vec2(cos(angle), sin(angle)) * radius * 0.5;
+	  	// Per-star angular velocity based on random seed and distance
+	  	float starRand = rand(floor(st));
+	  	float rotSpeed = rot_speed * (0.1 + 0.5 * starRand);
+	  	float distFactor = smoothstep(0.1, 0.1, r);
+	  	float theta = TIME * rotSpeed * distFactor;
 
-            // Offset randomly
-            vec2 offset = vec2(
-                rand(vec2(float(a), fi * 2.123)) - 0.5,
-                rand(vec2(float(a), fi * 3.456)) - 0.5
-            ) * arm_jitter;
-            pos += offset;
+	  	// Spiral by rotating position
+	  	angle += theta;
 
-            // Static brightness per star
-            float brightness_seed = rand(vec2(float(a), fi));
-            float brightness = mix(min_brightness, max_brightness, brightness_seed);
+	  	// New UV after spiral rotation
+	  	st = r * vec2(cos(angle), sin(angle));
+	  	// --- Spiral Transformation End ---
 
-            // Draw square
-            if (abs(uv.x - pos.x) < square_size && abs(uv.y - pos.y) < square_size) {
-                intensity += brightness;
-            }
-        }
-    }
+		color = stars(st);
+	} else {
+  		color = stars(st);
+	}
 
-    COLOR = vec4(vec3(intensity), intensity);
+    COLOR = vec4(color, alpha);
 }
