@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccetrmf5vhby0"]
+[gd_scene load_steps=14 format=3 uid="uid://ccetrmf5vhby0"]
 
 [ext_resource type="PackedScene" uid="uid://b0otbtktu22j8" path="res://gameManager/gameManager.tscn" id="1_0vhbo"]
 [ext_resource type="PackedScene" uid="uid://bwsjsl424h3v0" path="res://gravity_well/gravity_well.tscn" id="3_ldao0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bujxxpltm0nkl" path="res://asteroids/spawn_infos/normies.tres" id="5_43k3a"]
 [ext_resource type="Resource" uid="uid://bhjrsvh5wstdk" path="res://asteroids/spawn_infos/big_bois.tres" id="6_43k3a"]
 [ext_resource type="PackedScene" uid="uid://dr03li0o0632j" path="res://background/background.tscn" id="8_ttu8v"]
+[ext_resource type="PackedScene" uid="uid://bwlmv3tepdotc" path="res://Camera/camera_2d.tscn" id="9_ggk2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55n5f"]
 size = Vector2(1247.5, 39.5)
@@ -85,3 +86,6 @@ position = Vector2(194, 1.625)
 shape = SubResource("RectangleShape2D_43k3a")
 
 [node name="BackgroundMusic" parent="." instance=ExtResource("4_wg11f")]
+
+[node name="Camera2D" parent="." instance=ExtResource("9_ggk2x")]
+anchor_mode = 0
