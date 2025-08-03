@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://5g3i4mhst5kb"]
+[gd_scene load_steps=10 format=3 uid="uid://5g3i4mhst5kb"]
 
 [ext_resource type="Script" uid="uid://cuk138uhfuit" path="res://player/player.gd" id="1_qjkh3"]
 [ext_resource type="Script" uid="uid://b3s0q2nv1375l" path="res://player/tether.gd" id="2_g6k8r"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dphb8dao47hrq" path="res://player/player_explosion.tscn" id="3_g6k8r"]
 [ext_resource type="Script" uid="uid://c87y1h43er7n8" path="res://components/health.gd" id="3_yw30f"]
 [ext_resource type="Script" uid="uid://bfb6nj1lrv6ay" path="res://components/hurt_box.gd" id="4_qjkh3"]
+[ext_resource type="PackedScene" uid="uid://c6brcxi76t484" path="res://player/soundeffect_manager.tscn" id="7_boad6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]
 radius = 32.0156
@@ -123,6 +124,8 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="SoundeffectManager" parent="." instance=ExtResource("7_boad6")]
 
 [connection signal="body_exited" from="Player/NearMissBox" to="Tether" method="_on_near_miss_box_body_exited"]
 [connection signal="body_entered" from="Player/ShieldBox" to="Tether" method="_on_shield_box_body_entered"]
