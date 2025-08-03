@@ -15,3 +15,7 @@ signal outOfSafety
 signal backInSafety
 
 signal nearmissSignal(position)
+
+signal deathShake
+
+signal stopShake

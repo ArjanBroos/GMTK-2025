@@ -101,11 +101,13 @@ func deathStopToggle() -> void:
 	stopTimer()
 	grace_period_timer.stop()
 	deathStopTimer.start(deathStopSeconds*deathStopTimeScale)
+	Signalbus.deathShake.emit()
 
 func _destroy_player() -> void:
 	player.queue_free()
 
 func _on_player_died() -> void:
+	Signalbus.stopShake.emit()
 	Engine.time_scale = 0
 	game_over_hud.visible = true
 	game_over = true
