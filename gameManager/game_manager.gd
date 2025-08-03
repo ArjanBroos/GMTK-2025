@@ -70,11 +70,9 @@ func _calculate_shield_outline() -> Array[Vector2]:
 	return points
 
 func _on_shield_available() -> void:
-	print("shield available received")
 	shield_availability_icon.default_color = Color("0c48ff")
 
 func _on_shield_unavailable() -> void:
-	print("shield not available received")
 	shield_availability_icon.default_color = Color("635b5f")
 
 # Function sets the player score to 0
