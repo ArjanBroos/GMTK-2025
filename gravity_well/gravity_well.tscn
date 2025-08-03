@@ -9,6 +9,7 @@ radius = 63.0714
 [node name="GravityWell" type="Node2D" node_paths=PackedStringArray("area")]
 script = ExtResource("1_cg1c0")
 area = NodePath("Area2D")
+pullFactor = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_tclyp")

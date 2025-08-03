@@ -90,6 +90,24 @@ shape = SubResource("RectangleShape2D_43k3a")
 [node name="Camera2D" parent="." instance=ExtResource("9_ggk2x")]
 anchor_mode = 0
 
+[node name="GravityWellSpawner3" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("9_5br84")]
+position = Vector2(637, 362)
+spawn_area = NodePath("CollisionShape2D")
+initial_spawn_delay_in_seconds = 62.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityWellSpawner3"]
+position = Vector2(-7.5, -4)
+shape = SubResource("RectangleShape2D_arlwx")
+
+[node name="GravityWellSpawner2" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("9_5br84")]
+position = Vector2(642, 358)
+spawn_area = NodePath("CollisionShape2D")
+initial_spawn_delay_in_seconds = 41.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityWellSpawner2"]
+position = Vector2(-7.5, -4)
+shape = SubResource("RectangleShape2D_arlwx")
+
 [node name="GravityWellSpawner" parent="." node_paths=PackedStringArray("spawn_area") instance=ExtResource("9_5br84")]
 position = Vector2(640, 360)
 spawn_area = NodePath("CollisionShape2D")

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpawnInfo" load_steps=2 format=3 uid="uid://bujxxpltm0nkl"]
 
-[ext_resource type="Script" path="res://asteroids/spawn_info.gd" id="1_d73w0"]
+[ext_resource type="Script" uid="uid://bx5hqjycq2lby" path="res://asteroids/spawn_info.gd" id="1_d73w0"]
 
 [resource]
 script = ExtResource("1_d73w0")
-interval = 3.0
+interval = 4.0
 min_speed = 50.0
 max_speed = 120.0
 nrof_segments = 9
