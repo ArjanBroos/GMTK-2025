@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6brcxi76t484"]
+[gd_scene load_steps=11 format=3 uid="uid://c6brcxi76t484"]
 
 [ext_resource type="Script" uid="uid://bnxe3f5o6njhj" path="res://player/soundeffect_manager.gd" id="1_e58sp"]
 [ext_resource type="AudioStream" uid="uid://bjqpihktrsp2y" path="res://soundManager/nearmissSound/nearmiss1.ogg" id="2_2qtjp"]
@@ -9,8 +9,9 @@
 [ext_resource type="AudioStream" uid="uid://bu4ssdy6fw72f" path="res://soundManager/nearmissSound/nearmiss6.ogg" id="7_cpd7w"]
 [ext_resource type="AudioStream" uid="uid://ccrdxtvloa22r" path="res://soundManager/nearmissSound/nearmiss7.ogg" id="8_6inbw"]
 [ext_resource type="AudioStream" uid="uid://csw2mwpc7xrei" path="res://soundManager/nearmissSound/nearmiss8.ogg" id="9_vpxjk"]
+[ext_resource type="AudioStream" uid="uid://dap1i5dtv860t" path="res://soundManager/achorSound/achorSound1.ogg" id="10_2qtjp"]
 
-[node name="SoundeffectManager" type="Node" node_paths=PackedStringArray("audioPlayer")]
+[node name="SoundeffectManager" type="Node" node_paths=PackedStringArray("audioPlayer", "anchorAudioPlayer")]
 script = ExtResource("1_e58sp")
 audioPlayer = NodePath("AudioStreamPlayer2D")
 nearmissSound1 = ExtResource("2_2qtjp")
@@ -21,5 +22,10 @@ nearmissSound5 = ExtResource("6_y403t")
 nearmissSound6 = ExtResource("7_cpd7w")
 nearmissSound7 = ExtResource("8_6inbw")
 nearmissSound8 = ExtResource("9_vpxjk")
+anchorAudioPlayer = NodePath("AudioStreamPlayer")
+anchorSound = ExtResource("10_2qtjp")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_2qtjp")
