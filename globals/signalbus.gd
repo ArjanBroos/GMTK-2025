@@ -15,3 +15,6 @@ signal outOfSafety
 signal backInSafety
 
 signal nearmissSignal(position)
+
+signal shieldAvailable
+signal shieldUnavailable

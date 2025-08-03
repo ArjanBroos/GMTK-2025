@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5g3i4mhst5kb"]
+[gd_scene load_steps=9 format=3 uid="uid://5g3i4mhst5kb"]
 
 [ext_resource type="Script" uid="uid://cuk138uhfuit" path="res://player/player.gd" id="1_qjkh3"]
 [ext_resource type="Script" uid="uid://b3s0q2nv1375l" path="res://player/tether.gd" id="2_g6k8r"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g6k8r"]
 radius = 32.0156
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_boad6"]
+radius = 26.0192
 
 [node name="PlayerHome" type="Node2D"]
 
@@ -91,4 +94,27 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/NearMissBox"]
 shape = SubResource("CircleShape2D_g6k8r")
 
+[node name="ShieldBox" type="Area2D" parent="Player"]
+collision_layer = 32
+collision_mask = 8
+
+[node name="ShieldCollisionShape" type="CollisionShape2D" parent="Player/ShieldBox"]
+shape = SubResource("CircleShape2D_boad6")
+disabled = true
+
+[node name="ShieldOutline" type="Line2D" parent="Player/ShieldBox"]
+visible = false
+closed = true
+width = 2.0
+default_color = Color(0.0460029, 0.283837, 1, 1)
+
+[node name="ShieldTimer" type="Timer" parent="Player"]
+wait_time = 0.2
+one_shot = true
+
+[node name="ShieldCooldownTimer" type="Timer" parent="Player"]
+wait_time = 2.5
+one_shot = true
+
 [connection signal="body_exited" from="Player/NearMissBox" to="Tether" method="_on_near_miss_box_body_exited"]
+[connection signal="body_entered" from="Player/ShieldBox" to="Tether" method="_on_shield_box_body_entered"]
