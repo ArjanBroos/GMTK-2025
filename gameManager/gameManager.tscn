@@ -11,6 +11,22 @@ font_size = 48
 font_color = Color(0.12405, 0.543801, 0.724597, 1)
 shadow_color = Color(0.662452, 0.662452, 0.662452, 0.592157)
 
+[sub_resource type="Animation" id="Animation_ifvbb"]
+resource_name = "boom"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("multiplierLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_8gvic"]
 resource_name = "wiggle"
 length = 0.15
@@ -26,22 +42,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1143, 25), Vector2(1144, 26), Vector2(1142, 24), Vector2(1143, 26), Vector2(1142, 26)]
-}
-
-[sub_resource type="Animation" id="Animation_ifvbb"]
-resource_name = "boom"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("multiplierLabel:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ifvbb"]
@@ -101,7 +101,7 @@ label_settings = SubResource("LabelSettings_op76p")
 horizontal_alignment = 1
 
 [node name="ShieldAvailabilityIcon" type="Line2D" parent="GUI"]
-position = Vector2(81, 650)
+position = Vector2(1196, 151)
 scale = Vector2(1.5, 1.5)
 points = PackedVector2Array(-0.5, -28, 4, -23, 9, -23, 14, -28, 14, 2, -1, 13, -16, 2, -16, -28, -11, -23, -5, -23)
 closed = true
