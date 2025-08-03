@@ -22,6 +22,8 @@ func _activate() -> void:
 @onready var shield_timer: Timer = $"../Player/ShieldTimer"
 @onready var shield_cooldown_timer: Timer = $"../Player/ShieldCooldownTimer"
 
+@onready var visualization_fill: Polygon2D = $"../Player/VisualizationFill"
+
 func _ready() -> void:
 	activated = false
 	visible = false
@@ -81,12 +83,18 @@ func _spawn_shield() -> void:
 		shield_timer.start()
 		shield_cooldown_timer.start()
 		Signalbus.shieldUnavailable.emit()
+		visualization_fill.color = Color("00acd4")
+		visualization_fill.modulate.a = 0
+
+		var tween = create_tween()
+		tween.tween_property(visualization_fill, "modulate:a", 1, shield_cooldown_timer.wait_time)
 
 func _despawn_shield() -> void:
 	shield_collision_shape.disabled = true
 	shield_outline.visible = false
 
 func _restore_shield_availability() -> void:
+	visualization_fill.color = Color("d955ff")
 	Signalbus.shieldAvailable.emit()
 
 func _on_shield_box_body_entered(body: Node2D) -> void:
