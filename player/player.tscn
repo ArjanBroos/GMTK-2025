@@ -89,14 +89,13 @@ script = ExtResource("3_yw30f")
 metadata/_custom_type_script = "uid://c87y1h43er7n8"
 
 [node name="HurtBox" type="Area2D" parent="Player" node_paths=PackedStringArray("health")]
-visible = false
 collision_layer = 2
 script = ExtResource("4_qjkh3")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bfb6nj1lrv6ay"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player/HurtBox"]
-polygon = PackedVector2Array(-9, 2, -11, 12, 13, 12, 10, 2, 5, -10, 0, -13, -4, -10)
+polygon = PackedVector2Array(-5, 0, -4, 7, 5, 7, 6, 0, 4, -6, 0, -8, -4, -5)
 
 [node name="NearMissBox" type="Area2D" parent="Player"]
 visible = false
