@@ -13,7 +13,6 @@ var deathStopSeconds:float = 2
 @export var timeLabel: Label
 @export var scoreLabel: Label
 @export var game_over_hud: GameOverHud
-@export var highscores_hud: LooperoidsLeaderboard
 @export var player_spawn_point: Node2D
 @export var player_scene: PackedScene
 @export_file("*.tscn") var retry_scene_path: String
@@ -40,7 +39,6 @@ func _ready() -> void:
 	deathStopTimer.timeout.connect(_on_player_died)
 	
 	game_over_hud.player_wants_to_try_again.connect(_on_player_wants_to_try_again)
-	game_over_hud.player_wants_to_see_highscores.connect(_on_player_wants_to_see_highscores)
 	print("starting scene")
 	resetScore()
 	startTimer()
@@ -116,10 +114,6 @@ func _on_player_wants_to_try_again() -> void:
 	game_over_hud.visible = false
 	game_over = false
 	get_tree().change_scene_to_file(retry_scene_path)
-
-func _on_player_wants_to_see_highscores() -> void:
-	highscores_hud.visible = true
-	highscores_hud.set_score(playerScore)
 
 func _spawn_player() -> void:
 	player = player_scene.instantiate()

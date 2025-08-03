@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfum31gpd8mqq" path="res://HUD/game_over_hud.gd" id="1_qrorf"]
 
-[node name="GameOver" type="Control" node_paths=PackedStringArray("try_again_button", "highscores_button")]
+[node name="GameOver" type="Control" node_paths=PackedStringArray("try_again_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qrorf")
 try_again_button = NodePath("VBoxContainer/TryAgainButton")
-highscores_button = NodePath("VBoxContainer/HighscoresButton")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -40,10 +39,6 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 47
 text = "GAME OVER"
-
-[node name="HighscoresButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Highscores"
 
 [node name="TryAgainButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
