@@ -22,3 +22,4 @@ signal deathShake
 
 signal stopShake
 
+signal anchorSound

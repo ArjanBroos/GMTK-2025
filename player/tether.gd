@@ -16,6 +16,7 @@ func _activate() -> void:
 	activated = true
 	visible = true
 	anchor.visible = true
+	Signalbus.anchorSound.emit()
 
 @onready var shield_collision_shape: CollisionShape2D = $"../Player/ShieldBox/ShieldCollisionShape"
 @onready var shield_outline: Line2D = $"../Player/ShieldBox/ShieldOutline"
