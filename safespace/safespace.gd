@@ -45,7 +45,7 @@ func _ready() -> void:
 	_set_collision_shape(shape)
 	_set_visible_shape(shape)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		# explicitly calculate the shape here because in-editor
 		# the _ready function is not called
@@ -55,10 +55,10 @@ func _process(delta: float) -> void:
 		queue_redraw()
 	
 	if !Engine.is_editor_hint() || (Engine.is_editor_hint() && !pause_in_editor):
-		rotate(deg_to_rad(rotation_speed / 100))
+		rotate(deg_to_rad((rotation_speed / 2) * delta))
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(_area: Area2D) -> void:
 	Signalbus.in_multiplier_area.emit()
 
-func _on_safe_area_area_exited(area: Area2D) -> void:
+func _on_safe_area_area_exited(_area: Area2D) -> void:
 	Signalbus.out_multiplier_area.emit()
