@@ -12,6 +12,7 @@ extends Node
 @export var anchorAudioPlayer: AudioStreamPlayer
 @export var anchorSound: AudioStream
 @export var gravityWellSound: AudioStream
+@export var multiplierSound: AudioStream
 
 var soundEffectVolume: float = -20
 var nearMissArray: Array[AudioStream] 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	audioPlayer.volume_db = soundEffectVolume
 	Signalbus.connect("anchorSound", playAnchorSound)
 	Signalbus.connect("gravityWellSpawn", playGravityWellSound)
+	Signalbus.connect("multiplierSoundPlay", playMultiplierSound)
 
 func playNearMiss(_eventPos: Vector2) -> void:
 	getNextNearMissSound()
@@ -42,5 +44,10 @@ func playAnchorSound() -> void:
 
 func playGravityWellSound() -> void:
 	anchorAudioPlayer.stream = gravityWellSound
+	anchorAudioPlayer.playing = true
+	anchorAudioPlayer.play()
+
+func playMultiplierSound() -> void:
+	anchorAudioPlayer.stream = multiplierSound
 	anchorAudioPlayer.playing = true
 	anchorAudioPlayer.play()

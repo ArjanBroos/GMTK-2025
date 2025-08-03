@@ -25,3 +25,5 @@ signal stopShake
 signal anchorSound
 
 signal gravityWellSpawn
+
+signal multiplierSoundPlay

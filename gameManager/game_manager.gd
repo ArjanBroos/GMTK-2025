@@ -178,6 +178,7 @@ func _increase_multiplier() -> void:
 	multiplier_animation.animation_finished.connect(_play_wiggle_anim)
 	score_multiplier = score_multiplier + 1
 	multiplier_label.text = "x%s" % score_multiplier
+	Signalbus.multiplierSoundPlay.emit()
 
 func _play_wiggle_anim(animation_name: String) -> void:
 	if animation_name == "boom":
