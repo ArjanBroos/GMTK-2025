@@ -16,6 +16,7 @@ gameoverMusic = ExtResource("5_skfni")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_tiel5")
+volume_db = -20.798
 autoplay = true
 
 [node name="Timer" type="Timer" parent="."]
