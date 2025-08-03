@@ -25,6 +25,7 @@ var score_multiplier: int = 1
 
 @onready var multiplier_label: Label = $GUI/multiplierLabel
 @onready var multiplier_timer: Timer = $MultiplierTimer
+@onready var multiplier_animation: AnimationPlayer = $GUI/MultiplierAnimation
 
 @onready var deathStopTimer: Timer = $DeathStopTimer
 
@@ -173,5 +174,11 @@ func _multiplier_area_exited() -> void:
 	score_multiplier = BASE_SCORE_MULTIPLIER
 
 func _increase_multiplier() -> void:
+	multiplier_animation.play("boom")
+	multiplier_animation.animation_finished.connect(_play_wiggle_anim)
 	score_multiplier = score_multiplier + 1
 	multiplier_label.text = "x%s" % score_multiplier
+
+func _play_wiggle_anim(animation_name: String) -> void:
+	if animation_name == "boom":
+		multiplier_animation.play("wiggle")
