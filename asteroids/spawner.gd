@@ -12,7 +12,16 @@ var spawn_area: CollisionShape2D
 @export var spawns: Array[SpawnInfo] = []
 
 func _ready() -> void:
+	# spawn a single asteroid once to kick things off
+	var one_shot_timer = Timer.new()
+	one_shot_timer.wait_time = randf_range(0, 0.3)
+	one_shot_timer.one_shot = true
+	one_shot_timer.autostart = true
+	one_shot_timer.timeout.connect(_on_spawn_timer_timeout.bind(spawns[0]))
+	add_child(one_shot_timer)
+
 	for sp in spawns:
+
 		# set up the timer for spawning the asteroids
 		spawn_timer = Timer.new()
 		add_child(spawn_timer)
