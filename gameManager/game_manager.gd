@@ -40,8 +40,6 @@ func _ready() -> void:
 	Signalbus.connect("shieldAvailable", _on_shield_available)
 	Signalbus.connect("shieldUnavailable", _on_shield_unavailable)
 
-	shield_availability_icon.points = _calculate_shield_outline()
-
 	grace_period_timer.timeout.connect(deathStopToggle)
 	deathStopTimer.timeout.connect(_on_player_died)
 	
@@ -53,21 +51,6 @@ func _ready() -> void:
 	_spawn_player()
 	nrAsteroids = 0
 	Engine.time_scale = 1
-
-func _calculate_shield_outline() -> Array[Vector2]:
-	var points: Array[Vector2] = []
-
-	# calculate shield outline
-	var segments = 22
-	var step = (2 * PI) / segments
-	var radius = 20
-
-	# calculate a circle of points, adding noise for each point to make mountains and valleys
-	for i in range(segments):
-		var vec = Vector2(cos(i * step) * radius, sin(i * step) * radius)
-		points.append(vec)
-
-	return points
 
 func _on_shield_available() -> void:
 	shield_availability_icon.default_color = Color("0c48ff")
