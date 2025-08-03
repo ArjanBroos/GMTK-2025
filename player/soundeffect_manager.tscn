@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6brcxi76t484"]
+[gd_scene load_steps=14 format=3 uid="uid://c6brcxi76t484"]
 
 [ext_resource type="Script" uid="uid://bnxe3f5o6njhj" path="res://player/soundeffect_manager.gd" id="1_e58sp"]
 [ext_resource type="AudioStream" uid="uid://bjqpihktrsp2y" path="res://soundManager/nearmissSound/nearmiss1.ogg" id="2_2qtjp"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dap1i5dtv860t" path="res://soundManager/achorSound/achorSound1.ogg" id="10_2qtjp"]
 [ext_resource type="AudioStream" uid="uid://ddwghytw2p0g" path="res://soundManager/gravityWellSound/gravityWellogg.ogg" id="11_mdjuc"]
 [ext_resource type="AudioStream" uid="uid://c7lccimj16x06" path="res://soundManager/multiplierSound/multiplier.ogg" id="12_0tt4y"]
+[ext_resource type="AudioStream" uid="uid://ddroiwvwmk3jt" path="res://soundManager/ShieldSound/shieldSpawn.ogg" id="13_mlvji"]
 
 [node name="SoundeffectManager" type="Node" node_paths=PackedStringArray("audioPlayer", "anchorAudioPlayer")]
 script = ExtResource("1_e58sp")
@@ -28,6 +29,7 @@ anchorAudioPlayer = NodePath("AudioStreamPlayer")
 anchorSound = ExtResource("10_2qtjp")
 gravityWellSound = ExtResource("11_mdjuc")
 multiplierSound = ExtResource("12_0tt4y")
+shieldSound = ExtResource("13_mlvji")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 

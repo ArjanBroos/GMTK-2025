@@ -13,11 +13,11 @@ extends Node
 @export var anchorSound: AudioStream
 @export var gravityWellSound: AudioStream
 @export var multiplierSound: AudioStream
+@export var shieldSound: AudioStream
 
 var soundEffectVolume: float = -20
 var nearMissArray: Array[AudioStream] 
 var nextMissSound: AudioStream
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +27,7 @@ func _ready() -> void:
 	Signalbus.connect("anchorSound", playAnchorSound)
 	Signalbus.connect("gravityWellSpawn", playGravityWellSound)
 	Signalbus.connect("multiplierSoundPlay", playMultiplierSound)
+	Signalbus.connect("shieldAvailable", playShieldSound)
 
 func playNearMiss(_eventPos: Vector2) -> void:
 	getNextNearMissSound()
@@ -49,5 +50,10 @@ func playGravityWellSound() -> void:
 
 func playMultiplierSound() -> void:
 	anchorAudioPlayer.stream = multiplierSound
+	anchorAudioPlayer.playing = true
+	anchorAudioPlayer.play()
+
+func playShieldSound() -> void:
+	anchorAudioPlayer.stream = shieldSound
 	anchorAudioPlayer.playing = true
 	anchorAudioPlayer.play()
