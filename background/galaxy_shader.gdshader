@@ -1,8 +1,8 @@
 shader_type canvas_item;
 
 uniform vec3 star_color = vec3(0.0, 0.1, 0.2);
-uniform float scale = 100.0;
-uniform float rot_speed = 0.1;
+uniform float scale = 150.0;
+uniform float rot_speed = -0.1;
 uniform float alpha = 0.2;
 uniform float shine = 2.0;
 
@@ -44,8 +44,9 @@ void fragment() {
 	uv.x /= aspect_ratio;
 
 	// Center it
-	vec2 st = (uv - vec2(0.5 / aspect_ratio, 0.5));
-  	st *= scale;
+	vec2 st_unscaled = (uv - vec2(0.5 / aspect_ratio, 0.5));
+	vec2 st = st_unscaled * scale;
+	float norm_dist = length(st_unscaled);
 
 	// Star effect
 	vec3 color;
@@ -56,12 +57,12 @@ void fragment() {
 
 	  	// Per-star angular velocity based on random seed and distance
 	  	float starRand = rand(floor(st));
-	  	float rotSpeed = rot_speed * (0.1 + 0.5 * starRand);
-	  	float distFactor = smoothstep(0.1, 0.1, r);
-	  	float theta = TIME * rotSpeed * distFactor;
+	  	float distFactor = mix(0.5, 1.5, norm_dist);
+		float rotSpeed = rot_speed * distFactor;
+	  	float theta = TIME * distFactor;
 
 	  	// Spiral by rotating position
-	  	angle += theta;
+	  	angle -= theta;
 
 	  	// New UV after spiral rotation
 	  	st = r * vec2(cos(angle), sin(angle));
