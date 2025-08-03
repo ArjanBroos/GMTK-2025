@@ -3,6 +3,19 @@ extends Line2D
 
 @export var player: Player
 @export var max_length: float = 150.0
+@export var activation_period_in_seconds: float = 5.0
+@export var anchor: Node2D
+@export var tether_activation_timer: Timer
+
+var current_length
+var activation_period_left
+var activated
+var initial_length
+
+func _activate() -> void:
+	activated = true
+	visible = true
+	anchor.visible = true
 
 @onready var shield_collision_shape: CollisionShape2D = $"../Player/ShieldBox/ShieldCollisionShape"
 @onready var shield_outline: Line2D = $"../Player/ShieldBox/ShieldOutline"
@@ -10,6 +23,13 @@ extends Line2D
 @onready var shield_cooldown_timer: Timer = $"../Player/ShieldCooldownTimer"
 
 func _ready() -> void:
+	activated = false
+	visible = false
+	anchor.visible = false
+	activation_period_left = activation_period_in_seconds
+	initial_length = 800.0
+	current_length = initial_length
+	tether_activation_timer.timeout.connect(_activate)
 	_update_line()
 	shield_timer.timeout.connect(_despawn_shield)
 	shield_cooldown_timer.timeout.connect(_restore_shield_availability)
@@ -25,22 +45,30 @@ func _ready() -> void:
 		shield_outline.add_point(vec)
 
 func _process(delta: float) -> void:
+	_update_tether_length(delta)
 	_clamp_player_pos()
 	_update_line()
-
 	if Input.is_action_just_pressed("trigger_shield"):
 		_spawn_shield()
+
+func _update_tether_length(delta: float) -> void:
+	if activated:
+		if activation_period_left > 0.0:
+			activation_period_left -= delta
+			current_length = lerp(initial_length, max_length, 1.0 - activation_period_left / activation_period_in_seconds)
+		else:
+			current_length = max_length
 
 func _clamp_player_pos() -> void:
 	var direction = global_position.direction_to(player.global_position)
 	var distance = global_position.distance_to(player.global_position)
-	if (distance > max_length):
-		player.global_position = global_position + max_length * direction
+	if (distance > current_length):
+		player.global_position = global_position + current_length * direction
 
 func _update_line() -> void:
 	set_point_position(1, to_local(player.global_position))
 	var distance = global_position.distance_to(player.global_position)
-	var proportion = distance / max_length
+	var proportion = distance / current_length
 	default_color = Color(1.0, 1.0 - proportion, 1.0 - proportion, proportion*proportion / 2)
 
 func _on_near_miss_box_body_exited(_body: Node2D) -> void:
