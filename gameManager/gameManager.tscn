@@ -1,18 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0otbtktu22j8"]
+[gd_scene load_steps=7 format=3 uid="uid://b0otbtktu22j8"]
 
 [ext_resource type="Script" uid="uid://5vjm45mn1xfm" path="res://gameManager/game_manager.gd" id="1_8equb"]
 [ext_resource type="PackedScene" uid="uid://dfm10ac6t4mhr" path="res://HUD/gui.tscn" id="2_6ue64"]
 [ext_resource type="PackedScene" uid="uid://5g3i4mhst5kb" path="res://player/player.tscn" id="2_ah4dg"]
 [ext_resource type="PackedScene" uid="uid://c8no1lpcxau83" path="res://HUD/game_over.tscn" id="4_op76p"]
+[ext_resource type="PackedScene" uid="uid://10aipp4jmgtd" path="res://addons/talo/samples/leaderboards/leaderboard.tscn" id="5_8gvic"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_op76p"]
 font_color = Color(0.828874, 0, 0.00784069, 1)
 
-[node name="GameManager" type="Node" node_paths=PackedStringArray("timeLabel", "scoreLabel", "game_over_hud")]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("timeLabel", "scoreLabel", "game_over_hud", "highscores_hud")]
 script = ExtResource("1_8equb")
 timeLabel = NodePath("GUI/timeLabel")
 scoreLabel = NodePath("GUI/scoreLabel")
 game_over_hud = NodePath("GameOver")
+highscores_hud = NodePath("Leaderboard")
 player_scene = ExtResource("2_ah4dg")
 
 [node name="GUI" parent="." instance=ExtResource("2_6ue64")]
@@ -61,6 +63,9 @@ label_settings = SubResource("LabelSettings_op76p")
 horizontal_alignment = 1
 
 [node name="GameOver" parent="." instance=ExtResource("4_op76p")]
+visible = false
+
+[node name="Leaderboard" parent="." instance=ExtResource("5_8gvic")]
 visible = false
 
 [node name="GracePeriodTimer" type="Timer" parent="."]
