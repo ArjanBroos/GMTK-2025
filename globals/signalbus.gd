@@ -21,3 +21,4 @@ signal shieldUnavailable
 signal deathShake
 
 signal stopShake
+
