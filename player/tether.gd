@@ -73,7 +73,7 @@ func _update_line() -> void:
 	set_point_position(1, to_local(player.global_position))
 	var distance = global_position.distance_to(player.global_position)
 	var proportion = distance / current_length
-	default_color = Color(1.0, 1.0 - proportion, 1.0 - proportion, proportion*proportion / 2)
+	default_color = Color(1.0, 1.0 - proportion, 1.0 - proportion, proportion / 2 + 0.1)
 
 func _on_near_miss_box_body_exited(_body: Node2D) -> void:
 	Signalbus.nearmissSignal.emit(player.global_position)
