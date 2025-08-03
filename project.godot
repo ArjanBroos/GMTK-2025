@@ -25,6 +25,7 @@ Talo="*res://addons/talo/talo_manager.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
+window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://cw3217gbyy0ey"
 
 [editor_plugins]
