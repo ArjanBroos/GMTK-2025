@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Signalbus="*res://globals/signalbus.gd"
+Talo="*res://addons/talo/talo_manager.gd"
 
 [display]
 
@@ -25,6 +26,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
 mouse_cursor/custom_image="uid://cw3217gbyy0ey"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/talo/plugin.cfg")
 
 [layer_names]
 

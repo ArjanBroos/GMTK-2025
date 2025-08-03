@@ -17,3 +17,5 @@ mono_crash.*.json
 
 # VS Code specifics
 .vscode
+
+apikey.txt
