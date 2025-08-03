@@ -18,3 +18,6 @@ signal nearmissSignal(position)
 
 signal shieldAvailable
 signal shieldUnavailable
+signal deathShake
+
+signal stopShake
