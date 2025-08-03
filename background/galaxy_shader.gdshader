@@ -62,7 +62,7 @@ void fragment() {
 	  	float theta = TIME * distFactor;
 
 	  	// Spiral by rotating position
-	  	angle -= theta;
+	  	angle -= rotSpeed * theta;
 
 	  	// New UV after spiral rotation
 	  	st = r * vec2(cos(angle), sin(angle));

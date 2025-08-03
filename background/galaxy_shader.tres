@@ -4,10 +4,8 @@
 
 [resource]
 shader = ExtResource("1_ffolc")
-shader_parameter/arms = 8
-shader_parameter/squares_per_arm = 40
-shader_parameter/swirl_speed = 0.1
-shader_parameter/square_size = 0.003
-shader_parameter/min_brightness = 0.05
-shader_parameter/max_brightness = 0.3
-shader_parameter/arm_jitter = 0.08
+shader_parameter/star_color = Vector3(0, 0.1, 0.2)
+shader_parameter/scale = 150.0
+shader_parameter/rot_speed = 0.1
+shader_parameter/alpha = 0.2
+shader_parameter/shine = 2.0
