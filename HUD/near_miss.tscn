@@ -11,5 +11,5 @@ script = ExtResource("1_d6o4h")
 [node name="BonusMessage" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Near miss!    +1"
+text = "   +10"
 label_settings = SubResource("LabelSettings_d6o4h")

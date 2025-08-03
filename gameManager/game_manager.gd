@@ -1,6 +1,6 @@
 extends Node
 
-const NEAR_MISS_SCORE: int = 1
+const NEAR_MISS_SCORE: int = 10
 
 var playerScore: int = 0
 var gameTimer: float = 0.0
