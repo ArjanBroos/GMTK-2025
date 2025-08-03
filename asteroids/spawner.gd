@@ -3,7 +3,7 @@ class_name Spawner
 
 const POSITION_NOISE: float = 100.0
 const TIMER_INCREASE: float = 2.0
-const TIMER_MAX_CAP_MULTIPLIER: float = 2.0
+const TIMER_MAX_CAP_MULTIPLIER: float = 1.0
 
 var asteroid_scene = preload("res://asteroids/asteroid.tscn")
 
