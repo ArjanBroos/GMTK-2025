@@ -80,6 +80,7 @@ default_color = Color(0.687159, 0.00145028, 0.834129, 1)
 [node name="FollowCursor" type="Node2D" parent="Player" node_paths=PackedStringArray("follower")]
 script = ExtResource("2_rkbax")
 follower = NodePath("..")
+max_speed = 400.0
 metadata/_custom_type_script = "uid://valb3o157auw"
 
 [node name="Health" type="Node" parent="Player"]
