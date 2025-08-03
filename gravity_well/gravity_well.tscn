@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwsjsl424h3v0"]
+[gd_scene load_steps=3 format=3 uid="uid://bwsjsl424h3v0"]
 
 [ext_resource type="Script" uid="uid://cnhq76ttfiaav" path="res://gravity_well/gravity_well.gd" id="1_cg1c0"]
-[ext_resource type="Texture2D" uid="uid://dnlo2036uj0bu" path="res://gravity_well/gravity_well.png" id="1_tclyp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pu504"]
 radius = 63.0714
@@ -10,11 +9,37 @@ radius = 63.0714
 script = ExtResource("1_cg1c0")
 area = NodePath("Area2D")
 pullFactor = 1000.0
+rotationSpeed = 5.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_tclyp")
+[node name="Circumference" type="Line2D" parent="."]
+position = Vector2(1, 0)
+points = PackedVector2Array(0, -64, 27, -58, 48, -42, 58, -20, 62, 0, 58, 23, 46, 42, 28, 56, 0, 63, -22, 60, -46, 45, -59, 26, -65, 0, -59, -24, -46, -45, -22, -60, 0, -64)
+width = 5.0
+default_color = Color(0.415686, 0, 0.313726, 0.709804)
+
+[node name="Arrow" type="Line2D" parent="."]
+points = PackedVector2Array(4, -35, 20, -31, 31, -20, 35, 0)
+width = 5.0
+default_color = Color(0.415686, 0, 0.313726, 0.709804)
+
+[node name="Line2D" type="Line2D" parent="Arrow"]
+points = PackedVector2Array(23, -7, 35, 0, 45, -10)
+width = 5.0
+default_color = Color(0.415686, 0, 0.313726, 0.709804)
+
+[node name="Arrow" type="Line2D" parent="Arrow"]
+rotation = 3.13906
+points = PackedVector2Array(4, -35, 20, -31, 31, -20, 35, 0)
+width = 5.0
+default_color = Color(0.415686, 0, 0.313726, 0.709804)
+
+[node name="Line2D" type="Line2D" parent="Arrow/Arrow"]
+points = PackedVector2Array(23, -7, 35, 0, 45, -10)
+width = 5.0
+default_color = Color(0.415686, 0, 0.313726, 0.709804)
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 8
 
