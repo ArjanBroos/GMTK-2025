@@ -3,6 +3,7 @@ class_name Spawner
 
 const POSITION_NOISE: float = 100.0
 const TIMER_INCREASE: float = 2.0
+const TIMER_MAX_CAP_MULTIPLIER: float = 2.0
 
 var asteroid_scene = preload("res://asteroids/asteroid.tscn")
 
@@ -68,5 +69,9 @@ func _spawn_asteroid(sp: SpawnInfo) -> void:
 func _on_spawn_timer_timeout(sp: SpawnInfo, timer: Timer) -> void:
 	_spawn_asteroid(sp)
 
-	timer.wait_time = timer.wait_time + TIMER_INCREASE
+	# if not chunky boi and the timer is still lower than the cap, increase the timer
+	# this, so that over time you do not get overwhelmed with asteroids
+	if sp.radius < 40 && timer.wait_time < sp.interval * TIMER_MAX_CAP_MULTIPLIER:
+		timer.wait_time = timer.wait_time + TIMER_INCREASE
+	
 	timer.start(timer.wait_time)
