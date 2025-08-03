@@ -21,6 +21,7 @@ func _spawn() -> void:
 	add_child(well)
 	well.global_position = _pick_position()
 	inter_spawn_timer.start()
+	Signalbus.gravityWellSpawn.emit()
 
 func _pick_position() -> Vector2:
 	var spawnSize = spawn_area.shape.get_rect().size

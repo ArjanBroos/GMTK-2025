@@ -23,3 +23,5 @@ signal deathShake
 signal stopShake
 
 signal anchorSound
+
+signal gravityWellSpawn
