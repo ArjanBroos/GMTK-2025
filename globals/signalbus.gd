@@ -11,8 +11,8 @@ signal spawnAsteroid
 
 signal despawnAsteroid
 
-signal outOfSafety
-signal backInSafety
+signal in_multiplier_area
+signal out_multiplier_area
 
 signal nearmissSignal(position)
 

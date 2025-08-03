@@ -11,3 +11,4 @@ nrof_segments = 9
 radius = 10.0
 radius_noise = 0.3
 mass = 1.0
+metadata/_custom_type_script = "uid://bx5hqjycq2lby"

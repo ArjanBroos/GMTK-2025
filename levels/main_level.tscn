@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://bujxxpltm0nkl" path="res://asteroids/spawn_infos/normies.tres" id="5_43k3a"]
 [ext_resource type="Resource" uid="uid://bhjrsvh5wstdk" path="res://asteroids/spawn_infos/big_bois.tres" id="6_43k3a"]
 [ext_resource type="PackedScene" uid="uid://dr03li0o0632j" path="res://background/background.tscn" id="8_ttu8v"]
-[ext_resource type="PackedScene" uid="uid://cl1ovutat8l5l" path="res://gravity_well/gravity_well_spawner.tscn" id="9_5br84"]
+[ext_resource type="PackedScene" path="res://gravity_well/gravity_well_spawner.tscn" id="9_5br84"]
 [ext_resource type="PackedScene" uid="uid://bwlmv3tepdotc" path="res://Camera/camera_2d.tscn" id="9_ggk2x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55n5f"]

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://10aipp4jmgtd" path="res://addons/talo/samples/leaderboards/leaderboard.tscn" id="5_8gvic"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_op76p"]
+font_size = 48
 font_color = Color(0.828874, 0, 0.00784069, 1)
 
 [node name="GameManager" type="Node" node_paths=PackedStringArray("timeLabel", "scoreLabel", "game_over_hud", "highscores_hud")]
@@ -44,21 +45,16 @@ size_flags_vertical = 0
 text = "Score: 0"
 horizontal_alignment = 1
 
-[node name="unsafeLabel" type="Label" parent="GUI"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -81.5
-offset_top = -160.0
-offset_right = 81.5
-offset_bottom = -111.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Warning!
-Unsafe area entered!"
+[node name="multiplierLabel" type="Label" parent="GUI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -137.0
+offset_top = 25.0
+offset_right = -36.0
+offset_bottom = 92.0
+grow_horizontal = 0
+text = "x%s"
 label_settings = SubResource("LabelSettings_op76p")
 horizontal_alignment = 1
 
@@ -77,7 +73,7 @@ visible = false
 [node name="Leaderboard" parent="." instance=ExtResource("5_8gvic")]
 visible = false
 
-[node name="GracePeriodTimer" type="Timer" parent="."]
+[node name="MultiplierTimer" type="Timer" parent="."]
 wait_time = 5.0
 
 [node name="DeathStopTimer" type="Timer" parent="."]
