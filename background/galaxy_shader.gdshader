@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform vec3 star_color = vec3(0.0, 0.1, 0.2);
 uniform float scale = 100.0;
-uniform float rot_speed = 1.0;
+uniform float rot_speed = 0.1;
 uniform float alpha = 0.2;
 uniform float shine = 2.0;
 
@@ -16,7 +16,7 @@ float rand(in vec2 st) {
 
 float particles(in vec2 st) {
   float r = rand(floor(st));
-  return 0.00 + smoothstep(0.995, 1.0, r) * max(0.0, sin(r * 34433.0 + TIME));
+  return smoothstep(0.995, 1.0, r) * max(0.0, sin(r * 34433.0 + TIME));
 }
 
 vec3 avg(in vec2 st, in float a) {
@@ -50,7 +50,7 @@ void fragment() {
 	// Star effect
 	vec3 color;
     if (ENABLE_SPIRAL) {
-			  	// --- Spiral Transformation Begin ---
+		// --- Spiral Transformation Begin ---
 	  	float r = length(st);
 	  	float angle = atan(st.y, st.x);
 
