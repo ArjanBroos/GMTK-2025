@@ -73,7 +73,8 @@ func _load_entries() -> void:
 	_build_entries()
 
 func _on_submit_pressed() -> void:
-	await Talo.players.identify("username", username.text)
+	var name = username.text.strip_edges(true, true).strip_escapes()
+	await Talo.players.identify("username", name)
 
 	var res := await Talo.leaderboards.add_entry(leaderboard_internal_name, _score)
 
